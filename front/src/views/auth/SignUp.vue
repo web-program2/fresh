@@ -243,11 +243,11 @@
     name: 'signUp',
     data () {
       return {
-        id : '',
-        pw : '',
-        checkPw : '',
-        nickName : '',
-        email : '', 
+        id : 'aaa111',
+        pw : 'aaa111!',
+        checkPw : 'aaa111!',
+        nickName : 'dsfa12312',
+        email : 'mdfaf2@naver.com', 
         show1: false, show2 : false,
         idRules: [
           value => !!value || '영어, 숫자 합쳐서 6글자 이상 만들어주세요.',
@@ -292,7 +292,7 @@
         }catch(err){
           console.log(err);
         }
-        if(res){
+        if(!res){
           let result = confirm("사용가능한 아이디입니다. 아이디를 사용하시겠습니까?");
           if(result){ 
             this.overlapId = true;
@@ -319,7 +319,7 @@
         }catch(err){
           console.log(err);
         }
-        if(res){
+        if(!res){
           let result = confirm("사용가능한 닉네임입니다. 닉네임을 사용하시겠습니까?");
           if(result){
             this.overlapNickName = true;
@@ -336,10 +336,10 @@
         if(this.overlapEmail){
           alert('인증 번호가 이미 발송되었습니다.'); return;
         }
-        //이메일 형식 확인
-        // if(!signValidation.validationEmail(this.email)){
-        //   alert('이메일 형식에 맞추어 작성해주세요.'); return;
-        // }
+        // 이메일 형식 확인
+        if(!signValidation.validationEmail(this.email)){
+          alert('이메일 형식에 맞추어 작성해주세요.'); return;
+        }
         let res;
         try{
           res = await this.$store.dispatch('send_email', {

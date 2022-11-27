@@ -5,7 +5,7 @@
       <v-row justify="center">
         <v-col cols='4'>
           <router-link to="/home">
-            <div style="text-align: center;"> <h2 style="display : inline">MFI</h2>&nbsp;&nbsp;&nbsp;Metaphor For Investing</div>
+            <div style="text-align: center;"> <h2 style="display : inline">FRESH</h2>&nbsp;&nbsp;&nbsp;깨끗한 농산물 도매</div>
           </router-link>
         </v-col>
       </v-row>
@@ -13,7 +13,7 @@
       <router-view />
       <v-row justify="center">
         <v-col cols='4'>
-          <div style="text-align: center;">© 2021 MetaphorForInvesting.com. All rights reserved.</div>
+          <div style="text-align: center;">© 2022 웹프로그래밍2</div>
         </v-col>
       </v-row>
     </v-container>
@@ -23,7 +23,7 @@
       <v-row justify="center">
         <v-col cols='8'>
           <router-link to="/home">
-            <div style="text-align: center;"> <h2 style="display : inline">MFI</h2></div>
+            <div style="text-align: center;"> <h2 style="display : inline">FRESH</h2></div>
           </router-link>
         </v-col>
       </v-row>
@@ -32,7 +32,7 @@
 
       <v-row justify="center">
         <v-col cols='12'>
-          <div style="text-align: center;">© 2021 MetaphorForInvesting.com. <br> All rights reserved.</div>
+          <div style="text-align: center;">© 2022 웹프로그래밍2 </div>
         </v-col>
       </v-row>
     </v-container>

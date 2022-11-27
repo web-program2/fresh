@@ -9,9 +9,6 @@ Vue.config.productionTip = false;
 Vue.prototype.$Vue = Vue;
 
 const init = async ()=> {
-  
-
-
   new Vue({
     router,
     store,
