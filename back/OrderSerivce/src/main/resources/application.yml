@@ -3,28 +3,27 @@ server:
 
 spring:
   application:
-    name: user-service
+    name: order-service
   h2:
     console:
       enabled: true
       settings:
         web-allow-others: true
       path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
-    username: sa
-greeting:
-  message: Welcome to the Simple E-Commerce.
 
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
-    register-with-eureka: true
-    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
 logging:
   level:
-    com.example.User_service.client: DEBUG
+    com.example.com.example.OrderSerivce: DEBUG
