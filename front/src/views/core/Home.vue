@@ -42,10 +42,12 @@
 
 <script>
 /* eslint-disable */
+import MainCatalogItem from '../../components/MainCatalogItem.vue';
 
   export default {
     name: 'Home',
     components: {
+        MainCatalogItem
     },
     created() {
 
