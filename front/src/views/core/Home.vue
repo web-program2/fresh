@@ -9,8 +9,8 @@
                     <v-col cols='11'>
                         <v-col class="imageWrapper"  style="text-align: center;">
                             <div id="imageText">
-                                <h1 id="mfi_mean">Metaphor For Investing</h1> <br><br>
-                                <p class="subtitle">MFI는 금융시장의 메타포를 찾기 위한 아이디어를 공유하는 장소입니다.</p>
+                                <h1 id="mfi_mean">Fresh 장터</h1> <br><br>
+                                <p class="subtitle">신선한 농산물은 싼 가격에 살 수 있는 장소입니다.</p>
                             </div>
                         </v-col>
                     </v-col>
@@ -25,86 +25,16 @@
                 <v-row justify="center" >
                     <v-col cols='3' />
                     <v-col cols="9">
-                        <h2 style="font-size : 30px;">MFI Highlight</h2> 
-                        <h4>MFI는 웹을 활용하여 주식 종목 분석 정보를 얻고, 다양한 견해를 생각해볼 수 있습니다.</h4>
+                        <h2 style="font-size : 30px;">Fresh Highlight</h2> 
+                        <h4>최근 올라온 상품을 확인해볼 수 있습니다.</h4>
                     </v-col>
                 </v-row>
+                <!-- 최근 상품 6개 가지고오기 -->
                 <v-row justify="center" style="text-align : center" >
-                    <v-col cols='1' />
-                    <v-col cols='3' class="model"  >
-                        <div class="modelContainer">
-                            <div class = "div_article">
-                                <img src="@/assets/user.svg" alt="주식 분석 글" class="article">
-                            </div>
-                            <div class="article_content">
-                                <!-- <br> 함께하는 투자자 <br> <span style="font-size : 2em"> {{userCount}} </span> 명 -->
-                            </div>
-                        </div>
-                    </v-col>
-                    <v-col cols='3' class="model">
-                        <div class="modelContainer">
-                            <div class="div_article">
-                                <img src="@/assets/idea.svg" alt="경제 사진" class="article">
-                            </div>
-                            <div class="article_content">
-                                <br> 현재 종목 분석 글 <br> <span style="font-size : 2em"> {{ideaCount}} </span> 개
-                                <br> <span style="font-size:0.7em">(모든 종목 분석 글이며, 회원 등급에 따라 수가 달라질 수 있습니다.)</span>
-                            </div>
-                        </div>
-                    </v-col>
-                    <v-col cols='3' class="model"  >
-                        <div class="modelContainer">
-                            <div class = "div_article">
-                                <img src="@/assets/visit.svg" alt="방문자" class="article">
-                            </div>
-                            <div class="article_content">
-                                <br> 방문자 수 <br> today : <span style="font-size : 2em"> {{todayVisitor}} </span> <br>
-                                <!-- total : {{totalVisitor}} -->
-                            </div>
-                        </div>
+                    <v-col cols="12">
+                        
                     </v-col>
                  </v-row>
-            </v-col>
-        </v-row>
-
-        <!-- mobile row -->
-        <v-row class="mobile_item">
-            <v-col class="model"  >
-                <div class="mobile_container">
-                    <div class = "mobile_article">
-                        <img src="@/assets/idea.svg" alt="방문자" class="mobile_img">
-                    </div>
-                    <div class="mobile_article_content">
-                        <br> 현재 종목 분석 글 <br> <span style="font-size : 2em"> {{ideaCount}} </span> 개
-                        <br> <span style="font-size:0.7em">(모든 종목 분석 글이며, 회원 등급에 따라 수가 달라질 수 있습니다.)</span>
-                    </div>
-                </div>
-            </v-col>
-        </v-row>
-        <v-row class="mobile_item">
-            <v-col class="model"  >
-                <div class="mobile_container">
-                    <div class = "mobile_article">
-                        <img src="@/assets/user.svg" alt="방문자" class="mobile_img">
-                    </div>
-                    <div class="mobile_article_content">
-                        <br> 함께하는 투자자 <br> <span style="font-size : 2em"> {{userCount}} </span> 명
-                    </div>
-                </div>
-            </v-col>
-        </v-row>
-        <v-row class="mobile_item">
-            <v-col class="model"  >
-                <div class="mobile_container">
-                    <div class = "mobile_article">
-                        <img src="@/assets/visit.svg" alt="방문자" class="mobile_img">
-                    </div>
-                    <div class="mobile_article_content">
-                        <br> 방문자 수 
-                        <br> today : <span style="font-size : 2em"> {{todayVisitor}} </span>
-                        <br> today : {{totalVisitor}}
-                    </div>
-                </div>
             </v-col>
         </v-row>
     </v-container>
@@ -118,24 +48,10 @@
     components: {
     },
     created() {
-        // this.getUserCount();
-        // this.getIdeaCount();
-        // this.getTodayVisitorCount();
-        // this.getTotalVisitorCount();
+
     },
     computed : {
-        // userCount : function(){
-        //     return this.$store.getters.get_user_count.data;
-        // },
-        // ideaCount : function(){
-        //     return this.$store.getters.get_idea_count.data;
-        // },
-        // todayVisitor : function(){
-        //     return this.$store.getters.get_today_visitor_count.data;
-        // },
-        // totalVisitor : function(){
-        //     return this.$store.getters.get_total_visitor_count.data;
-        // },
+
     },
     data() {
         return {
@@ -167,8 +83,8 @@
     }
 }
 .imageWrapper{
-    background-image: url("../../assets/home_idea.jpg"); background-repeat : no-repeat;
-    background-size : cover; opacity: 0.85;
+    background-image: url("../../assets/fresh.png"); background-repeat : no-repeat;
+    background-size : cover; opacity: 1;
 }
 .main{
     position: relative;
@@ -178,13 +94,12 @@
 }
 
 #mfi_mean{
-   font-family: 'Chosunilbo_myungjo'; color: white; line-height: 200px;
-    font-size:80px; font-weight: 900;
+   font-family: 'Chosunilbo_myungjo'; color: rgb(8, 0, 82); line-height: 200px;
+    font-size:80px; 
 }
 .subtitle{
     font-family: 'Chosunilbo_myungjo';color: white; 
-    font-size:22px;
-    font-weight: normal; font-weight: 900;
+    font-size:22px;font-weight: 900;
 }
 
 #main_center{
