@@ -1,15 +1,6 @@
 <template>
     <v-card class="mx-auto overflow-hidden">
-        <v-app-bar app="app" color="#CFD8DC" >
-            <!-- mobile title and icon -->
-            <v-toolbar-title class="mobile">
-                <v-col cols='3'>
-                    <router-link to="/home">
-                        <h3>MFI</h3> 
-                    </router-link>
-                </v-col>
-            </v-toolbar-title>
-
+        <v-app-bar app="app" color="green" >
             <!-- pc version -->
             <v-row justify='center' id="pc">
                 <v-col cols='3'>
@@ -19,33 +10,25 @@
                 </v-col>
                 <v-col cols='1' class="pc_nav">
                     <router-link to="/about">
-                        <v-btn text="text" rounded="rounded" color="#455A64" style="margin-top:15px;">
-                            MFI 소개
+                        <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
+                            FRESH 소개
                         </v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols='1' class="pc_nav">
                     <router-link to="/idea">
-                        <v-btn text="text" rounded="rounded" color="#455A64" style="margin-top:15px;">
-                            분석글
+                        <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
+                            장터
                         </v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols='1' class="pc_nav">
                     <router-link to="/notice">
-                        <v-btn text="text" rounded="rounded" color="#455A64" style="margin-top:15px;">
+                        <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
                             공지
                         </v-btn>
                     </router-link>          
                 </v-col>
-                <v-col cols='1' class="pc_nav">
-                    <router-link to="/news">
-                        <v-btn text="text" rounded="rounded" color="#455A64" style="margin-top:15px;">
-                            증권 뉴스
-                        </v-btn>
-                    </router-link>          
-                </v-col>
-                <!-- 5 cols -->
                 <v-spacer />
                 
                 <v-col cols='2' id="loginWelcomeWrapper"   v-if="isLogin()">
@@ -74,101 +57,7 @@
                     </router-link>
                 </v-col>    
             </v-row>
-        
-            <!-- mobile version row -->
-            <v-row justify=  'center' class="mobile">
-                
-            </v-row>
-
-            <v-app-bar-nav-icon @click="drawer = true" class="mobile"></v-app-bar-nav-icon>
-
-            <!-- 로그인 -->
-            <v-app-bar-nav-icon @click="userDrawer = true" class="mobile" v-if="isLogin()">
-                <v-icon>mdi-account-circle-outline</v-icon>
-            </v-app-bar-nav-icon>
-            <router-link class="mobile" v-else  to="/auth/signin">
-                <v-icon>mdi-account-circle-outline</v-icon>
-            </router-link>
-            
         </v-app-bar>
-
-
-        <v-navigation-drawer v-model="drawer" temporary :app="true" :bottom="true" class="mobile">
-            <v-list nav dense>
-                <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-                    <router-link to="/about">
-                        <v-list-item>
-                            <v-list-item-icon>
-                                <v-icon>mdi-file-document</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>
-                                MFI 소개
-                            </v-list-item-title>
-                        </v-list-item>
-                    </router-link>
-                    
-                    <router-link to="/idea">
-                        <v-list-item>
-                            <v-list-item-icon>
-                                <v-icon>mdi-file-document-edit</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>
-                                분석글
-                            </v-list-item-title>
-                        </v-list-item>
-                    </router-link>
-
-                    <router-link to="/notice">
-                        <v-list-item>
-                            <v-list-item-icon>
-                                <v-icon>mdi-android-messages</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>
-                                공지
-                            </v-list-item-title>
-                        </v-list-item>
-                    </router-link>
-
-                    <router-link to="/news">
-                        <v-list-item>
-                            <v-list-item-icon>
-                                <v-icon>mdi-android-messages</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>
-                                증권 뉴스
-                            </v-list-item-title>
-                        </v-list-item>
-                    </router-link>
-
-                </v-list-item-group>
-            </v-list>
-        </v-navigation-drawer>
-
-
-        <v-navigation-drawer v-model="userDrawer" temporary :app="true" :right="true"  class="mobile">
-            <v-list nav dense>
-                <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-                    <router-link to="/info">
-                        <v-list-item>
-                            <v-list-item-icon>
-                                <v-icon>mdi-account</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>
-                                내 정보
-                            </v-list-item-title>
-                        </v-list-item>
-                    </router-link>
-                    <v-list-item v-on:click="logout">
-                        <v-list-item-icon>
-                            <v-icon>mdi-account-off</v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>
-                            로그아웃
-                        </v-list-item-title>
-                    </v-list-item>
-                </v-list-item-group>
-            </v-list>
-        </v-navigation-drawer>
     </v-card>
 
 
