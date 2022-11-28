@@ -75,4 +75,12 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(returnValue);
     }
+
+    @PostMapping("/check_id")
+    public boolean duplicatedId(@RequestBody String id){
+        System.out.println(id);
+        return true;
+    }
+
+
 }
