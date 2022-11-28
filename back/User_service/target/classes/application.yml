@@ -1,19 +1,33 @@
 server:
   port: 0
 
+
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgresSQLDialect
+  hibernate.ddl-auto: update
+  show-sql: true
+properties:
+  hibernate.format_sql: true
+
+
+spring.datasource:
+  hikari.maximum-pool-size: 4
+  url: jdbc:postgresql://localhost:5432/fresh
+  username: mfi
+  password: postgres
+  driver-class-name: org.postgresql.Driver
+
 spring:
   application:
     name: user-service
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
+  sql:
+    init:
+      platform: postgres
+
+
+
+
 greeting:
   message: Welcome to the Simple E-Commerce.
 
@@ -25,6 +39,14 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+
+
+
+
+
+
 logging:
   level:
     com.example.User_service.client: DEBUG

@@ -1,25 +1,28 @@
 server:
   port: 0
 
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgresSQLDialect
+  hibernate.ddl-auto: update
+  show-sql: true
+properties:
+  hibernate.format_sql: true
+
+spring.datasource:
+  hikari.maximum-pool-size: 4
+  url: jdbc:postgresql://localhost:5432/fresh
+  username: mfi
+  password: postgres
+  driver-class-name: org.postgresql.Driver
+
 spring:
   application:
     name: catalog-service
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    generate-ddl: true
-    defer-datasource-initialization: true
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
+  sql:
+    init:
+      platform: postgres
+
 
 logging:
   level:
