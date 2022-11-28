@@ -14,18 +14,22 @@ public class CatalogEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, length = 120, unique = true)
-    private String productId;
+    private Long catalog_idx;
+
     @Column(nullable = false)
-    private String productName;
+    private String name;
+
     @Column(nullable = false)
     private Integer stock;
+
     @Column(nullable = false)
-    private Integer unitPrice;
+    private Integer price;
 
     @Column(nullable = false, updatable = false, insertable = false)
     @ColumnDefault( value = "CURRENT_TIMESTAMP")
     private Date createdAt;
+
+    @Column(nullable = false)
+    private Integer user_Idx;
 
 }

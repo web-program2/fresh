@@ -6,11 +6,17 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="users")
+@Table(name="user")
 public class UserEntity {
     @Id
     @GeneratedValue
-    private Long id;
+    private Long user_idx;
+
+    @Column(nullable = false, unique = true)
+    private String id;
+
+    @Column(nullable = false, unique = true)
+    private String pw;
 
     @Column(nullable = false, length = 50, unique = true)
     private String email;
@@ -18,11 +24,8 @@ public class UserEntity {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, unique = true)
-    private String userId;
-
-    @Column(nullable = false, unique = true)
-    private String encryptedPwd;
+    @Column(nullable = false, length = 50)
+    private String role;
 
 
 
