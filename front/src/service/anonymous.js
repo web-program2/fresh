@@ -12,8 +12,29 @@ const checkId = async (id) => {
     }
     console.log(res);
 }
-const checkNickName = (nickName) => {
-
+const checkNickName = async(nickName) => {
+    let res;
+    try{
+        res = await axios.post('http://localhost:8000/user-service/check_nickname', {
+            nickName : nickName
+        })
+    }catch(err){
+        console.log(err);
+    }
+    console.log(res);
+}
+const signIn = async(id, pw, isForce) => {
+    let res;
+    try{
+        res = await axios.post('http://localhost:8000/user-service/sign_in', {
+            id : id,
+            pw : pw,
+            isForce : isForce
+        })
+    }catch(err){
+        console.log(err);
+    }
+    console.log(res);
 }
 const sendEmail = (email) => {
 
@@ -21,5 +42,6 @@ const sendEmail = (email) => {
 
 
 export default {
-    checkId, checkNickName, sendEmail
+    checkId, checkNickName, sendEmail,
+    signIn, 
 }
