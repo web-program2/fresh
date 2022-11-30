@@ -1,6 +1,13 @@
 server:
   port: 0
 
+spring:
+  application:
+    name: user-service
+  sql:
+    init:
+      platform: postgres
+
 
 spring.jpa:
   database: postgresql
@@ -13,17 +20,11 @@ properties:
 
 spring.datasource:
   hikari.maximum-pool-size: 4
-  url: jdbc:postgresql://localhost:5432/fresh
+  url: jdbc:postgresql://localhost:5432/fresh1
   username: mfi
   password: postgres
   driver-class-name: org.postgresql.Driver
 
-spring:
-  application:
-    name: user-service
-  sql:
-    init:
-      platform: postgres
 
 
 

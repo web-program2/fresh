@@ -1,16 +1,18 @@
 package com.example.User_service.controller;
 
+import com.example.User_service.dto.input.InputId;
 import com.example.User_service.dto.input.LoginInputDto;
 import com.example.User_service.dto.output.LoginOutDto;
 import com.example.User_service.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user-service")
 public class UserController {
-
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping("/sign_in")
     public LoginOutDto signIn(@RequestBody LoginInputDto loginInputDto){
@@ -20,9 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/check_id")
-    public boolean duplicatedId(@RequestBody String id){
-        System.out.println(id);
-        boolean res = userService.duplicatedId(id);
+    public boolean duplicatedId(@RequestBody InputId data){
+        boolean res = userService.duplicatedId(data.getId());
         return res;
     }
 
