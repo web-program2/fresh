@@ -27,8 +27,32 @@ public class UserRepo{
                 .getResultList();
     }
 
+
     public List<User> findAll() {
         return em.createQuery("select e from User e", User.class).getResultList();
     }
 
+    public User findByUserIdPw(String id, String pw) {
+        List<User> userList = findAll();
+        User res = new User();
+        for(int i =0; i < userList.size(); i++){
+            User user = userList.get(i);
+            if(user.getId().equals(id) && user.getPw().equals(pw)){
+                res =  user;
+            }
+        }
+        return res;
+    }
+
+
+
+    ///////////////////UserToken 관련)
+    public List<UserToken> findUserToken(long userIdx){
+        return em.createQuery("select m from UserToken m where m.userIdx = :userIdx", UserToken.class)
+                .setParameter("userIdx", userIdx)
+                .getResultList();
+    }
+    public void updateUserToken(Long userIdx, String accessToken) {
+
+    }
 }

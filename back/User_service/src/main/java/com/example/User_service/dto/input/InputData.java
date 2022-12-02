@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class InputData {
     private String id;
+    private String pw;
     private String nickName;
     private String email;
+    private String role;
 }
