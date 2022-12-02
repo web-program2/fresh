@@ -22,7 +22,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 50)
-    private String name;
+    private String nickName;
 
     @Column(nullable = false, length = 50)
     private String role;

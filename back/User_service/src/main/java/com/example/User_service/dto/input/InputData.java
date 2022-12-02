@@ -5,6 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class InputId {
+public class InputData {
     private String id;
+    private String nickName;
+    private String email;
 }

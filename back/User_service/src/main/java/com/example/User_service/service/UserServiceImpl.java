@@ -18,22 +18,24 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean duplicatedId(String id) {
-        System.out.println("찾으려는 id : " + id);
         List<User> user = userRepo.findByUserId(id);
-        System.out.println(user);
         boolean flag = user.size() == 0 ? false : true;
         return flag;
-//        return false;
     }
 
 
     @Override
     public boolean duplicatedNickName(String nickName) {
-        return false;
+        List<User> user = userRepo.findByUserNickName(nickName);
+        boolean flag= user.size() == 0 ? false : true;
+        return flag;
     }
 
     @Override
     public LoginOutDto signIn(String id, String pw) {
+        
+
+
         return null;
     }
 }

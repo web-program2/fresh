@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 
-./pom.xml
+.pom.xml
 
 ### STS ###
 .apt_generated
