@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginOutDto {
+public class LoginOutputDto {
     private String accessToken;
     private String refreshToken;
 

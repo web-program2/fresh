@@ -9,4 +9,5 @@ import lombok.Setter;
 public class LoginInputDto {
     private String id;
     private String pw;
+    private boolean isForce;
 }
