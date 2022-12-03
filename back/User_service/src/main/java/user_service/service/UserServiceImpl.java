@@ -1,15 +1,13 @@
-package com.example.User_service.service;
+package user_service.service;
 
-import com.example.User_service.dto.output.LoginOutputDto;
-import com.example.User_service.jpa.User;
-import com.example.User_service.jpa.UserRepo;
-import com.example.User_service.jpa.UserToken;
+import user_service.dto.output.LoginOutputDto;
+import user_service.jpa.User;
+import user_service.jpa.UserRepo;
+import user_service.jpa.UserToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -23,8 +21,6 @@ public class UserServiceImpl implements UserService{
         boolean flag = user.size() == 0 ? false : true;
         return flag;
     }
-
-
     @Override
     public boolean duplicatedNickName(String nickName) {
         List<User> user = userRepo.findByUserNickName(nickName);

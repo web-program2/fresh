@@ -1,4 +1,4 @@
-package com.example.User_service.dto.input;
+package user_service.dto.input;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.example.User_service.client;
+package user_service.client;
 
-import com.example.User_service.vo.ResponseOrder;
+import user_service.vo.ResponseOrder;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

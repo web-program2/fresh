@@ -1,4 +1,4 @@
-package com.example.User_service.dto.output;
+package user_service.dto.output;
 
 
 import lombok.Getter;

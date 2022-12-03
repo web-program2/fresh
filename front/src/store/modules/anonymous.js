@@ -21,7 +21,7 @@ const anonymous = {
                 console.log(err);
             }
             // 존재하면 true, 안 존재하면 false
-            return false;
+            return res;
         },
         async check_nick_name({commit},data){
             let res;
@@ -31,7 +31,7 @@ const anonymous = {
                 console.log(err);
             }
             // 존재하면 true, 안 존재하면 false
-            return false;
+            return res;
         },
         async send_email({commit},data){
             let res;

@@ -1,7 +1,7 @@
-package com.example.User_service.service;
+package user_service.service;
 
 
-import com.example.User_service.dto.output.LoginOutputDto;
+import user_service.dto.output.LoginOutputDto;
 
 public interface UserService {
 

@@ -1,9 +1,9 @@
-package com.example.User_service.controller;
+package user_service.controller;
 
-import com.example.User_service.dto.input.InputData;
-import com.example.User_service.dto.input.LoginInputDto;
-import com.example.User_service.dto.output.LoginOutputDto;
-import com.example.User_service.service.UserService;
+import user_service.dto.input.InputData;
+import user_service.dto.input.LoginInputDto;
+import user_service.dto.output.LoginOutputDto;
+import user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +43,9 @@ public class UserController {
         return res;
     }
 
+//    public User getUserData(){
+//
+//    }
 
 
 

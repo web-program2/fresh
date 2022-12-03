@@ -8,9 +8,9 @@ const checkId = async (id) => {
             id : id
         })
     }catch(err){
-        console.log(err);
+        throw new Error(err.message);
     }
-    console.log(res);
+    return res.data;
 }
 const checkNickName = async(nickName) => {
     let res;
@@ -19,9 +19,9 @@ const checkNickName = async(nickName) => {
             nickName : nickName
         })
     }catch(err){
-        console.log(err);
+        throw new Error(err.message);
     }
-    console.log(res);
+    return res.data;
 }
 const signIn = async(id, pw, isForce) => {
     let res;
@@ -32,7 +32,7 @@ const signIn = async(id, pw, isForce) => {
             isForce : isForce
         })
     }catch(err){
-        console.log(err);
+        throw new Error(err.message);
     }
     console.log(res);
 }
