@@ -1,19 +1,31 @@
 package user_service.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import user_service.client.CatalogServiceClient;
+import user_service.dto.UserCatalogDto;
 import user_service.dto.output.LoginOutputDto;
 import user_service.jpa.User;
 import user_service.jpa.UserRepo;
 import user_service.jpa.UserToken;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import user_service.vo.ResponseCatalog;
 
 import java.util.List;
 
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-    private final UserRepo userRepo;
+    private UserRepo userRepo;
+    private CatalogServiceClient catalogServiceClient;
+
+    @Autowired
+    public UserServiceImpl(UserRepo userRepo, CatalogServiceClient catalogServiceClient){
+        this.userRepo = userRepo;
+        this.catalogServiceClient = catalogServiceClient;
+    }
+
+
 
     @Override
     public boolean duplicatedId(String id) {
@@ -66,5 +78,16 @@ public class UserServiceImpl implements UserService{
     public boolean signUp(String id, String pw, String email, String nickName, String role) {
 //        userRepo.saveUser();
         return true;
+    }
+
+    @Override
+    public UserCatalogDto testAll(int userIdx) {
+        UserCatalogDto userCatalogDto = new UserCatalogDto();
+        User user = userRepo.getUserByIdx(userIdx).get(0);
+        userCatalogDto.setUser(user);
+        System.out.println(userIdx);
+        List<ResponseCatalog> responseCatalog = catalogServiceClient.testAll(userIdx);
+        userCatalogDto.setCatalogList(responseCatalog);
+        return userCatalogDto;
     }
 }

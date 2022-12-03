@@ -1,5 +1,7 @@
 package user_service.controller;
 
+import org.springframework.http.ResponseEntity;
+import user_service.dto.UserCatalogDto;
 import user_service.dto.input.InputData;
 import user_service.dto.input.LoginInputDto;
 import user_service.dto.output.LoginOutputDto;
@@ -46,6 +48,13 @@ public class UserController {
 //    public User getUserData(){
 //
 //    }
+
+    @PostMapping("/all")
+    public UserCatalogDto testAll(){
+        int temp = 1;
+        UserCatalogDto userDto = userService.testAll(temp);
+        return userDto;
+    }
 
 
 

@@ -53,4 +53,10 @@ public class UserRepo{
     public void updateUserToken(Long userIdx, String accessToken) {
 
     }
+
+    public List<User> getUserByIdx(long userIdx) {
+        return em.createQuery("select m from User m where m.userIdx = :userIdx", User.class)
+                .setParameter("userIdx", userIdx)
+                .getResultList();
+    }
 }
