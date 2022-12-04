@@ -2,7 +2,7 @@ package order_service.service;
 
 import order_service.dto.OrderDto;
 import order_service.jpa.Order;
-import order_service.jpa.OrderRepository;
+import order_service.jpa.OrderRepo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
-    private final OrderRepository orderRepository;
+    private final OrderRepo orderRepository;
 
     @Override
     public OrderDto createOrder(OrderDto orderDetails) {
