@@ -30,6 +30,15 @@ public class CatalogController {
         );
         return res;
     }
+    @PutMapping("")
+    public Catalog updateCatalog(@RequestBody CatalogDto catalogDto){
+        Catalog res = catalogService.updateCatalog(catalogDto.getCatalogIdx(),
+                catalogDto.getName(), catalogDto.getContent(),
+                catalogDto.getStock(),  catalogDto.getPrice(),
+                catalogDto.getUserIdx()
+        );
+        return res;
+    }
 //    @GetMapping()
 //    public List<Catalog>
 

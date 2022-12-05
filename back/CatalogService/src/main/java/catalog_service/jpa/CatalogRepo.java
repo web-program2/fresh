@@ -23,4 +23,7 @@ public class CatalogRepo {
         em.persist(catalog);
         return true;
     }
+    public Catalog updateCatalog(Catalog catalog){
+        return em.merge(catalog);
+    }
 }

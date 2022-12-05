@@ -9,4 +9,6 @@ public interface CatalogService {
     List<Catalog> testAll(int userIdx);
 
     boolean createCatalog(String name, String content, Integer stock, Integer userIdx, Integer price);
+
+    Catalog updateCatalog(Long catalogIdx, String name, String content, Integer stock, Integer price, Integer userIdx);
 }

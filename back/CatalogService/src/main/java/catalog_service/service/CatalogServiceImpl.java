@@ -44,4 +44,18 @@ public class CatalogServiceImpl implements CatalogService{
         boolean res  = catalogRepo.createCatalog(catalog);
         return res;
     }
+
+    @Transactional
+    @Override
+    public Catalog updateCatalog(Long catalogIdx, String name, String content, Integer stock, Integer price, Integer userIdx) {
+        Catalog catalog = new Catalog();
+        catalog.setCatalogIdx(catalogIdx);
+        catalog.setName(name);
+        catalog.setContent(content);
+        catalog.setStock(stock);
+        catalog.setPrice(price);
+        catalog.setUserIdx(userIdx);
+        Catalog res = catalogRepo.updateCatalog(catalog);
+        return res;
+    }
 }
