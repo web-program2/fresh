@@ -19,4 +19,8 @@ public class CatalogRepo {
     }
 
 
+    public boolean createCatalog(Catalog catalog) {
+        em.persist(catalog);
+        return true;
+    }
 }

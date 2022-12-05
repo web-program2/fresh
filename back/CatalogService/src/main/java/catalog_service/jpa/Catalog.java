@@ -20,6 +20,9 @@ public class Catalog implements Serializable {
     private String name;
 
     @Column(nullable = false)
+    private String content;
+
+    @Column(nullable = false)
     private Integer stock;
 
     @Column(nullable = false)
