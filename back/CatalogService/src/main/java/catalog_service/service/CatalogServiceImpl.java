@@ -58,4 +58,33 @@ public class CatalogServiceImpl implements CatalogService{
         Catalog res = catalogRepo.updateCatalog(catalog);
         return res;
     }
+
+    @Override
+    public List<Catalog> getCatalogList() {
+        List<Catalog> catalogList = catalogRepo.getCatalogList();
+        return catalogList;
+    }
+
+    @Override
+    public Catalog getCatalog(Long catalogIdx) {
+        List<Catalog> catalogList = catalogRepo.getCatalogList();
+        Catalog catalog = null;
+        for(int i = 0; i < catalogList.size(); i++){
+            if(catalogList.get(i).getCatalogIdx() == catalogIdx){
+                catalog = catalogList.get(i);
+            }
+        }
+        return catalog;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteCatalog(Long catalogIdx) {
+        Catalog catalog = getCatalog(catalogIdx);
+        boolean res = catalogRepo.deleteCatalog(catalog);
+        return res;
+    }
+
+
+
 }

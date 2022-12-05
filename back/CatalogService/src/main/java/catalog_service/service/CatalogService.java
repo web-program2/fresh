@@ -11,4 +11,9 @@ public interface CatalogService {
     boolean createCatalog(String name, String content, Integer stock, Integer userIdx, Integer price);
 
     Catalog updateCatalog(Long catalogIdx, String name, String content, Integer stock, Integer price, Integer userIdx);
+
+    List<Catalog> getCatalogList();
+    Catalog getCatalog(Long catalogIdx);
+
+    boolean deleteCatalog(Long catalogIdx);
 }

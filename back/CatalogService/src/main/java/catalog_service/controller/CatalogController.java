@@ -39,8 +39,22 @@ public class CatalogController {
         );
         return res;
     }
-//    @GetMapping()
-//    public List<Catalog>
+    @GetMapping()
+    public List<Catalog> getCatalogList(){
+        List<Catalog> catalogList = catalogService.getCatalogList();
+        return catalogList;
+    }
+    @DeleteMapping("/{catalogIdx}")
+    public boolean deleteCatalog(@PathVariable Long catalogIdx){
+        boolean res = catalogService.deleteCatalog(catalogIdx);
+        return res;
+    }
+    @GetMapping("/{catalogIdx}")
+    public Catalog getCatalog(@PathVariable Long catalogIdx){
+        Catalog catalog;
+        catalog = catalogService.getCatalog(catalogIdx);
+        return catalog;
+    }
 
     @PostMapping("/all")
     public List<Catalog> test(@RequestBody int userIdx){

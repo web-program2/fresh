@@ -26,4 +26,13 @@ public class CatalogRepo {
     public Catalog updateCatalog(Catalog catalog){
         return em.merge(catalog);
     }
+
+    public List<Catalog> getCatalogList() {
+        return em.createQuery("select e from Catalog e", Catalog.class).getResultList();
+    }
+    public boolean deleteCatalog(Catalog catalog) {
+        System.out.println(catalog);
+        em.remove(catalog);
+        return true;
+    }
 }
