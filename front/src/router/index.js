@@ -8,6 +8,9 @@ import authLayout from '../views/auth/layout/Index.vue';
 
 import coreLayout from '../views/core/layout/Index.vue';
 import home from '../views/core/Home.vue';
+import catalog from '../views/core/Catalog.vue';
+import notice from '../views/core/Notice.vue';
+import about from '../views/core/About.vue';
 
 Vue.use(VueRouter)
 
@@ -50,7 +53,20 @@ const routes = [
       {
         path : 'home',
         component : home
-      }
+      },
+      {
+        path : 'catalog',
+        component : catalog
+      },
+      {
+        path : 'about',
+        component : about
+      },
+      {
+        path : 'notice',
+        component : notice
+      },
+
     ]
   },  
 ]

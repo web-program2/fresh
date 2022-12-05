@@ -1,11 +1,11 @@
 <template>
     <v-card class="mx-auto overflow-hidden">
-        <v-app-bar app="app" color="green" >
+        <v-app-bar app="app" color="white" >
             <!-- pc version -->
             <v-row justify='center' id="pc">
                 <v-col cols='3'>
                     <router-link to="/home">
-                        <v-img  src="@/assets/fresh_logo.png" width="330" height="57" />
+                        <v-img  src="@/assets/fresh_logo.png" width="310" height="50" />
                     </router-link>
                 </v-col>
                 <v-col cols='1' class="pc_nav">
@@ -16,7 +16,7 @@
                     </router-link>
                 </v-col>
                 <v-col cols='1' class="pc_nav">
-                    <router-link to="/idea">
+                    <router-link to="/catalog">
                         <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
                             장터
                         </v-btn>
