@@ -1,5 +1,6 @@
 package catalog_service.controller;
 
+import catalog_service.dto.input.CatalogDto;
 import catalog_service.jpa.Catalog;
 import catalog_service.service.CatalogService;
 import org.modelmapper.ModelMapper;
@@ -21,22 +22,16 @@ public class CatalogController {
     public CatalogController(CatalogService catalogService) {
         this.catalogService = catalogService;
     }
-//
-//    @GetMapping("/health_check")
-//    public String status(HttpServletRequest request) {
-//        return String.format("It's Working in Catalog Service on Port %s", request.getServerPort());
-//    }
-//
-//    @GetMapping("/catalogs")
-//    public ResponseEntity<List<ResponseCatalog>> getCatalogs() {
-//        Iterable<CatalogEntity> orderList = catalogService.getAllCatalogs();
-//        List<ResponseCatalog> result = new ArrayList<>();
-//        orderList.forEach(v->{
-//            result.add(new ModelMapper().map(v, ResponseCatalog.class));
-//        });
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(result);
-//    }
+
+    @PostMapping("")
+    public boolean createCatalog(@RequestBody CatalogDto catalogDto){
+        boolean res = catalogService.createCatalog(catalogDto.getName(), catalogDto.getContent(), catalogDto.getStock(),
+                catalogDto.getUserIdx(), catalogDto.getPrice()
+        );
+        return res;
+    }
+//    @GetMapping()
+//    public List<Catalog>
 
     @PostMapping("/all")
     public List<Catalog> test(@RequestBody int userIdx){
@@ -44,16 +39,6 @@ public class CatalogController {
         System.out.println(catalogList);
         return catalogList;
     }
-//    @GetMapping("/{userId}/orders")
-//    public ResponseEntity<List<ResponseOrder>> getOrder(@PathVariable("userId")String userId) {
-//        Iterable<OrderEntity> orderList = orderService.getOrdersByUserId(userId);
-//
-//        List<ResponseOrder> result = new ArrayList<>();
-//        orderList.forEach(v ->{
-//            result.add(new ModelMapper().map(v, ResponseOrder.class));
-//        });
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(result);
-//    }
+
 
 }

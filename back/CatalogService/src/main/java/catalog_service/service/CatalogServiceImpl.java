@@ -2,12 +2,16 @@ package catalog_service.service;
 
 import catalog_service.jpa.Catalog;
 import catalog_service.jpa.CatalogRepo;
+import com.google.inject.internal.ErrorsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class CatalogServiceImpl implements CatalogService{
 
     private CatalogRepo catalogRepo;
@@ -19,6 +23,25 @@ public class CatalogServiceImpl implements CatalogService{
 
     @Override
     public List<Catalog> testAll(int userIdx) {
-        return this.catalogRepo.getCatalogByUserIdx(userIdx);
+        List<Catalog> catalogList = new ArrayList<>();
+//        try{
+//            catalogList = this.catalogRepo.getCatalogByUserIdx(userIdx);
+//        }catch(){
+//            throw new ErrorsException();
+//        }
+        return catalogList;
+    }
+
+    @Transactional
+    @Override
+    public boolean createCatalog(String name, String content, Integer stock, Integer userIdx, Integer price) {
+        Catalog catalog = new Catalog();
+        catalog.setName(name);
+        catalog.setContent(content);
+        catalog.setStock(stock);
+        catalog.setPrice(price);
+        catalog.setUserIdx(userIdx);
+        boolean res  = catalogRepo.createCatalog(catalog);
+        return res;
     }
 }
