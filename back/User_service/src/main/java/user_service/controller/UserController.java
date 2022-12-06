@@ -1,6 +1,6 @@
 package user_service.controller;
 
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.input.InputData;
 import user_service.dto.input.LoginInputDto;
@@ -8,6 +8,8 @@ import user_service.dto.output.LoginOutputDto;
 import user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 
 @RestController
@@ -56,6 +58,10 @@ public class UserController {
         return userDto;
     }
 
+    @GetMapping("/sendMail")
+    public boolean sendMail() throws MessagingException {
 
+        return userService.sendMail();
+    }
 
 }
