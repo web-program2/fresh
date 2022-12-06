@@ -7,7 +7,18 @@ spring:
   sql:
     init:
       platform: postgres
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: //gmail주소 입력
+    password: //2단계인증으로 나온 비번 입력
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
 
 spring.jpa:
   database: postgresql
@@ -20,14 +31,10 @@ properties:
 
 spring.datasource:
   hikari.maximum-pool-size: 4
-  url: jdbc:postgresql://localhost:5432/fresh1
+  url: jdbc:postgresql://localhost:5432/fresh2
   username: mfi
-  password: postgres
+  password: mfi
   driver-class-name: org.postgresql.Driver
-
-
-
-
 
 greeting:
   message: Welcome to the Simple E-Commerce.
@@ -40,12 +47,6 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-
-
-
-
-
 
 
 logging:

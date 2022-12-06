@@ -1,6 +1,9 @@
 package user_service.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import user_service.client.CatalogServiceClient;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.output.LoginOutputDto;
@@ -10,22 +13,17 @@ import user_service.jpa.UserToken;
 import org.springframework.stereotype.Service;
 import user_service.vo.ResponseCatalog;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-    private UserRepo userRepo;
-    private CatalogServiceClient catalogServiceClient;
-
-    @Autowired
-    public UserServiceImpl(UserRepo userRepo, CatalogServiceClient catalogServiceClient){
-        this.userRepo = userRepo;
-        this.catalogServiceClient = catalogServiceClient;
-    }
-
-
+    private final UserRepo userRepo;
+    private final CatalogServiceClient catalogServiceClient;
+    private final JavaMailSender mailSender;
 
     @Override
     public boolean duplicatedId(String id) {
@@ -90,4 +88,23 @@ public class UserServiceImpl implements UserService{
         userCatalogDto.setCatalogList(responseCatalog);
         return userCatalogDto;
     }
+
+    @Override
+    public boolean sendMail() {
+        try {
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,false,"UTF-8");
+
+            mailHelper.setTo("lch010201@naver.com");
+            mailHelper.setSubject("test1");
+            mailHelper.setText("content입니당", true);
+
+            mailSender.send(mail);
+            return true;
+        }catch(MessagingException e) {
+            throw new RuntimeException();
+        }
+
+    }
+
 }
