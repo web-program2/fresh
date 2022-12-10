@@ -4,25 +4,46 @@ import {catalog as catalogService} from '../../service';
 
 const catalog = {
     state:{
-
+        catalogs : [
+            {
+                name : 'aaaa',
+                price : '12312',
+                user : {
+                    name : 'afdaadsfasaa'
+                },
+                stock : 11
+            },
+            {
+                name : 'bbb',
+                price : '12312',
+                user : {
+                    name : 'dfas'
+                },
+                stock : 11
+            },
+        ],
     },
-    getter:{
-
+    getters:{
+        get_catalog_items(state){
+            return state.catalogs;
+        }
     },
     mutations: {
-
+        catalog_set_items(state, data){
+            state.catalogs= data;
+        }
     },
     actions:{
-        async check_id({commit},data){
+        async setting_catalog_items({commit}, data){
             let res;
             try{
-                res = anonymousService.checkId(data.id);
+                res = await catalogService.getCatalogItems();
             }catch(err){
-                console.log(err);
+                throw new Error(err.message);
             }
-            // 존재하면 true, 안 존재하면 false
-            return res;
-        },
+            commit('catalog_set_items', res.data);
+            return;
+        }
     }
 }
 
