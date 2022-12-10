@@ -6,7 +6,7 @@ const anonymous = {
     state:{
 
     },
-    getter:{
+    getters:{
 
     },
     mutations: {
