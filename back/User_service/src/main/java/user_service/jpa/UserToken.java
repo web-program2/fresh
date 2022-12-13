@@ -1,16 +1,17 @@
 package user_service.jpa;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
 
+@Builder
 @Data
-@Entity
-@Table(name="userTokens")
+@AllArgsConstructor
 public class UserToken {
-    @Id
-    private Long userIdx;
-
-    private String token;
+    private String grantType; //jwt 인증타입
+    private String accessToken;
+    private String refreshToken;
 }
+

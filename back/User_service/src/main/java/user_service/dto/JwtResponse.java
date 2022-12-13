@@ -1,2 +1,12 @@
-package user_service.dto;public class JwtResponse {
+package user_service.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+@AllArgsConstructor
+public class JwtResponse implements Serializable {
+    private String token;
 }

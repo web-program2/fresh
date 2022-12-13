@@ -1,9 +1,11 @@
 package user_service.service;
 
 
+import org.springframework.stereotype.Service;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.output.LoginOutputDto;
 
+@Service
 public interface UserService {
 
     public boolean duplicatedId(String id);
