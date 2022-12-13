@@ -2,6 +2,8 @@ server:
   port: 0
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   application:
     name: user-service
   sql:
@@ -10,8 +12,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: #gmail주소 입력
-    password: #2단계인증으로 나온 비번 입력
+    username: webbprogram2@gmail.com
+    password: uncpvsmwaedjektw
     properties:
       mail:
         smtp:

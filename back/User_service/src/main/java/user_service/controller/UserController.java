@@ -1,5 +1,7 @@
 package user_service.controller;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.input.InputData;
@@ -10,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -64,4 +69,22 @@ public class UserController {
         return userService.sendMail();
     }
 
+    @PostMapping("/token")
+    public String createToken(){
+        Date now = new Date();
+        return Jwts.builder()
+                .setSubject("aaaa") // 보통 username
+                .setHeader(createHeader())
+//                .setClaims(createClaims(member)) // 클레임, 토큰에 포함될 정보
+                .setExpiration(new Date(now.getTime() + 3600)) // 만료일
+                .signWith(SignatureAlgorithm.HS256, "aaaa")
+                .compact();
+    }
+    private Map<String, Object> createHeader() {
+        Map<String, Object> header = new HashMap<>();
+        header.put("typ", "JWT");
+        header.put("alg", "HS256"); // 해시 256 사용하여 암호화
+        header.put("regDate", System.currentTimeMillis());
+        return header;
+    }
 }
