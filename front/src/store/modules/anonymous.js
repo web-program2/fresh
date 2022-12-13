@@ -43,31 +43,27 @@ const anonymous = {
             // 존재하면 true, 안 존재하면 false
             return false;
         },
-        async sign_in({commit},data){
-            const {id, pw, isForce} = data;
+        async sign_in({commit}, input){
+            const {id, pw, isForce} = input;
+            let res;
             try{
-                res = anonymousService.signIn(id, pw, isForce);
+                res = await anonymousService.signIn(id, pw, isForce);
             }catch(err){
-                if(err.message === 'wrong pw'){
-                    throw new Error(err.message);
-                }
-                if(err.message === 'wrong id'){
-                    throw new Error(err.message);
-                }
-                if(err.message === 'isLogin'){
-                    throw new Error(err.message);
-                }
+                console.log(err.message);
+            }
+            console.log(res);
+            const resData = res.data;
+            if(resData.message){
+                const errMessage = resData.message;
+                throw new Error(errMessage);
             }
             // 로그인성공 시
-            if(res){
-                localStorage.setItem("accessToken", res.token);
-                localStorage.setItem("refreshToken", res.refreshToken);
-                await this.dispatch('get_user_data', res.token ); //login part라서 return값이 불 필요.
-                history.back();
-                return res;
-            }
+            localStorage.setItem("accessToken", resData.accessToken);
+            localStorage.setItem("refreshToken", resData.refreshToken);
+            await this.dispatch('get_user_data', resData.accessToken ); //login part라서 return값이 불 필요.
+            history.back();
+            return res;
             // 존재하면 true, 안 존재하면 false
-            return false;
         },
         
     }

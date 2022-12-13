@@ -51,12 +51,17 @@ public class UserRepo{
                 .getResultList();
     }
     public void updateUserToken(Long userIdx, String accessToken) {
-
+        em.createQuery();
     }
+
 
     public List<User> getUserByIdx(long userIdx) {
         return em.createQuery("select m from User m where m.userIdx = :userIdx", User.class)
                 .setParameter("userIdx", userIdx)
                 .getResultList();
+    }
+
+    public void createEmailNo(String email, String randomNo) {
+        em.createQuery();
     }
 }

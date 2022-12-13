@@ -2,27 +2,27 @@
     <v-card class="mx-auto overflow-hidden">
         <v-app-bar app="app" color="white" >
             <!-- pc version -->
-            <v-row justify='center' id="pc">
+            <v-row justify='center' >
                 <v-col cols='3'>
                     <router-link to="/home">
                         <v-img  src="@/assets/fresh_logo.png" width="310" height="50" />
                     </router-link>
                 </v-col>
-                <v-col cols='1' class="pc_nav">
+                <v-col cols='1' >
                     <router-link to="/about">
                         <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
                             FRESH 소개
                         </v-btn>
                     </router-link>
                 </v-col>
-                <v-col cols='1' class="pc_nav">
+                <v-col cols='1' >
                     <router-link to="/catalog">
                         <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
                             장터
                         </v-btn>
                     </router-link>
                 </v-col>
-                <v-col cols='1' class="pc_nav">
+                <v-col cols='1' >
                     <router-link to="/notice">
                         <v-btn text="text" rounded="rounded"  style="margin-top:15px; font-size:15px; font-weight: 600; ">
                             공지
