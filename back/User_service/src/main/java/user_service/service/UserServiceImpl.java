@@ -1,5 +1,8 @@
 package user_service.service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +18,8 @@ import user_service.vo.ResponseCatalog;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.List;
+import java.time.Duration;
+import java.util.*;
 
 
 @Service
@@ -39,29 +43,27 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public LoginOutputDto signIn(String id, String pw, boolean isForce) {
+    public LoginOutputDto signIn(String id, String pw, boolean isForce) throws Exception {
         // 1. id pw로 user 찾아오기
         User user = userRepo.findByUserIdPw(id, pw);
 
-        if(user == null){
-            throw new Error("not found");
+        if(user.getUserIdx() == null){
+            throw new Exception("not found");
         }
-        // login을 이미 돌렸을 경우
+
         if(!isForce){
             // 2. 해당 유저가 로그인되어져 있는지 확인해보기
             List<UserToken> userTokenList = userRepo.findUserToken(user.getUserIdx());
             UserToken userToken = userTokenList.get(0);
             if(userToken.getToken().length() > 0){
-                throw new Error("is login");
+                throw new Exception("is login");
             }
         }
 
         // 3. pw와 같은 민감한 데이터는 삭제 후 토큰을 발급.
         user.setPw("");
-//        String accessToken = jwtService.sign(user);
-//        String refreshToken = jwtService.sign();
-        String accessToken = "aa";
-        String refreshToken = "bbb";
+        String accessToken = this.generateAccessToken(user);
+        String refreshToken = this.generateRefreshToken();
         // 3. 해당 로그인 하는 유저의 토큰을 저장
         userRepo.updateUserToken(user.getUserIdx(), accessToken);
 
@@ -90,21 +92,73 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean sendMail() {
+    public boolean sendMail(String email) {
         try {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail,false,"UTF-8");
-
+            String randomNo = generateAuthentication();
             mailHelper.setTo("lch010201@naver.com");
-            mailHelper.setSubject("test1");
-            mailHelper.setText("content입니당", true);
-
+            mailHelper.setSubject("Fresh 인증번호");
+            String text = "Fresh 인증번호 : " + randomNo + " 입니다. ";
+            mailHelper.setText(text, true);
             mailSender.send(mail);
+            this.userRepo.createEmailNo(email, randomNo);
             return true;
         }catch(MessagingException e) {
             throw new RuntimeException();
         }
+    }
 
+
+    public String generateAuthentication(){
+        Random random = new Random();
+        String ranNum ="";
+        for (int i = 0; i < 6; i++) {
+            String ran = Integer.toString(random.nextInt(10));
+            if (!ranNum.contains(ran)) { //중복체크
+                ranNum += ran;
+            } else {
+                i -= 1;
+            }
+        }
+        return ranNum;
+    }
+
+    ////////////////// Token part //////////////////
+    private String generateAccessToken(User user){
+        Date now = new Date();
+        Long expiredTime = 1000 * 60L * 60L * 3L;//3시간
+        Claims claims= Jwts.claims();
+        claims.put("userIdx", user.getUserIdx());
+        claims.put("id", user.getId());
+        claims.put("nickName", user.getNickName());
+        claims.put("email", user.getEmail());
+        claims.put("role", user.getRole());
+
+
+        return Jwts.builder()
+                .setHeader(createHeader())
+                .setClaims(claims) // 클레임, 토큰에 포함될 정보
+                .setExpiration(new Date(now.getTime() + expiredTime)) // 만료일
+                .signWith(SignatureAlgorithm.HS256, "aaaa")
+                .compact();
+    }
+    private String generateRefreshToken(){
+        Date now = new Date();
+        long expiredTime = Duration.ofDays(14).toMillis();
+        return Jwts.builder()
+                .setHeader(createHeader())
+                .setExpiration(new Date(now.getTime() + expiredTime)) // 만료일
+                .signWith(SignatureAlgorithm.HS256, "aaaa")
+                .compact();
+    }
+
+    private Map<String, Object> createHeader() {
+        Map<String, Object> header = new HashMap<>();
+        header.put("typ", "JWT");
+        header.put("alg", "HS256"); // 해시 256 사용하여 암호화
+        header.put("regDate", System.currentTimeMillis());
+        return header;
     }
 
 }

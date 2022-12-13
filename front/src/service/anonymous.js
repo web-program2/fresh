@@ -34,7 +34,7 @@ const signIn = async(id, pw, isForce) => {
     }catch(err){
         throw new Error(err.message);
     }
-    console.log(res);
+    return res;
 }
 const sendEmail = (email) => {
 

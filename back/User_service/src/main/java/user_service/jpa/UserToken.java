@@ -12,5 +12,6 @@ public class UserToken {
     @Id
     private Long userIdx;
 
+    @Column()
     private String token;
 }

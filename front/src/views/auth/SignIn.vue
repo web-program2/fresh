@@ -115,7 +115,7 @@
 </style>
 <script>
 /* eslint-disable */
-  // import {signValidation} from '../../utils/validation/index';
+  import {signValidation} from '../../utils/validation/index';
   export default {
     name: 'SignIn',
     props : {
@@ -125,22 +125,22 @@
     },
     data() {
       return{
-        id : '',
-        pw : '',
+        id : 'aaa111',
+        pw : 'aaa111!',
         show1: false, show2 : false,
       }
     },
     methods: {
       async login(){
         /////////////////////////////////전처리/////////////////////////////////
-        // const preorderId = signValidation.checkId(this.id);
-        // if(preorderId.message){
-        //   alert('[아이디] ' +preorderId.message); return;
-        // }
-        // const preorderPw = signValidation.checkPw(this.pw);
-        // if(preorderPw.message){
-        //   alert('[비밀번호] ' +preorderPw.message); return;
-        // }
+        const preorderId = signValidation.checkId(this.id);
+        if(preorderId.message){
+          alert('[아이디] ' +preorderId.message); return;
+        }
+        const preorderPw = signValidation.checkPw(this.pw);
+        if(preorderPw.message){
+          alert('[비밀번호] ' +preorderPw.message); return;
+        }
         ///////////////////////////////////////////////////////////////////////
         try{
           await this.$store.dispatch('sign_in', {
@@ -150,13 +150,10 @@
           })
         }catch(err){
           /////////////////////////////////Wrong/////////////////////////////////
-          if(err.message === 'wrong id'){
-            alert('잘못된 아이디입니다.'); return;
+          if(err.message === 'not fount'){
+            alert('일치하는 회원 정보가 없습니다. 다시 로그인 해주세요.'); return;
           }
-          if(err.message === 'wrong pw'){
-            alert('잘못된 비밀번호입니다.'); return;
-          }
-          if(err.message === 'isLogin'){
+          if(err.message === 'is login'){
             let flag = confirm('다른 기기에서 로그인 중입니다.' + '\n' + '강제 로그아웃 하고 현재 기기에서 로그인 하시겠습니까?');
             if(flag){
               try{
