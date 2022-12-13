@@ -10,8 +10,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: //gmail주소 입력
-    password: //2단계인증으로 나온 비번 입력
+    username: #gmail주소 입력
+    password: #2단계인증으로 나온 비번 입력
     properties:
       mail:
         smtp:
@@ -31,9 +31,9 @@ properties:
 
 spring.datasource:
   hikari.maximum-pool-size: 4
-  url: jdbc:postgresql://localhost:5432/fresh2
+  url: jdbc:postgresql://localhost:5432/fresh1
   username: mfi
-  password: mfi
+  password: postgres
   driver-class-name: org.postgresql.Driver
 
 greeting:
