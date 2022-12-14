@@ -43,13 +43,14 @@ public class OrderServiceImpl implements OrderService{
                 order = orderList.get(i);
             }
         }
+        System.out.println(order);
 
         OrderCatalogUserDto orderCatalogUserDto = new OrderCatalogUserDto();
-        ResponseUser responseUser = userServiceClient.getResponseUser(order.getUserIdx());
+
         ResponseCatalog responseCatalog = catalogServiceClient.getResponseCatalog(order.getCatalogIdx());
+        System.out.println(responseCatalog);
 
         orderCatalogUserDto.setOrder(order);
-        orderCatalogUserDto.setResponseUser(responseUser);
         orderCatalogUserDto.setResponseCatalog(responseCatalog);
 
         return orderCatalogUserDto;

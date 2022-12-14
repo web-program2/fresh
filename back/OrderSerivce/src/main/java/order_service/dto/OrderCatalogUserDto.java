@@ -9,6 +9,5 @@ import order_service.vo.ResponseUser;
 public class OrderCatalogUserDto {
     private Order order;
     private ResponseCatalog responseCatalog;
-    private ResponseUser responseUser;
 
 }
