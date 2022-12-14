@@ -75,7 +75,6 @@
         },
         data(){
             return{
-                accessToken : localStorage.getItem('accessToken'),
                 nickName : '',
                 role : '',
                 drawer: false,
@@ -87,10 +86,13 @@
             userData : function(){
                 return this.$store.getters.auth_get_data;
             },
+            accessToken : function(){
+                return localStorage.getItem('accessToken');
+            }
         },
         methods : {
             initialize(){
-               if(this.accessToken != null){
+               if(this.accessToken !== null){
                    return true;
                } else{
                    return false;

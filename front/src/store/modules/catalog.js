@@ -43,6 +43,15 @@ const catalog = {
             }
             commit('catalog_set_items', res.data);
             return;
+        },
+        async create_catalog_item({commit}, data){
+            console.log(data);
+            let res;
+            try{
+                res = await catalogService.createCatalogItem(data);
+            }catch(err){
+                console.log(err);
+            }
         }
     }
 }

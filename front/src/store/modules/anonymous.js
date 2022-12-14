@@ -1,16 +1,20 @@
 /* eslint-disable */
 import {anonymous as anonymousService} from '../../service'; 
-
+import jwt_decode from 'jwt-decode';
 
 const anonymous = {
     state:{
-
+        userData : {},
     },
     getters:{
-
+        auth_get_data (state) {
+            return state.userData;
+        },
     },
     mutations: {
-
+        auth_set_data (state, authData) { // 로그인 한 유저 데이터 저장
+            state.userData = {...authData};
+        },
     },
     actions:{
         async check_id({commit},data){
@@ -61,7 +65,6 @@ const anonymous = {
             }catch(err){
                 console.log(err.message);
             }
-            console.log(res);
             const resData = res.data;
             if(resData.message){
                 const errMessage = resData.message;
@@ -75,8 +78,23 @@ const anonymous = {
             return res;
             // 존재하면 true, 안 존재하면 false
         },
+        async get_user_data({commit}, token){
+            let userData;
+            try{
+                userData = await jwt_decode(token); // id, nickName, email, role, userIdx
+            }catch(err){
+                console.log(err.message);
+            }
+            commit('auth_set_data', userData);
+        },
         async sign_up({commit}, data) {
             console.log(data);
+            let res;
+            try{
+                res = await anonymousService.signUp(data);
+            }catch(err){
+                console.log(err);
+            }
         }
         
     }

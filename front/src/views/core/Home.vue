@@ -57,8 +57,6 @@ import MainCatalogItem from '../../components/MainCatalogItem.vue';
     },
     data() {
         return {
-            userComponent : ConnectionUser,
-            items : this.connectionUserList
         }
     },
     methods : {
@@ -69,21 +67,6 @@ import MainCatalogItem from '../../components/MainCatalogItem.vue';
 </script>
 
 <style scoped>
-@media all and (max-width:767px) {
-    #pc_main, .pc_margin, .pc_item{
-        display: none;
-    }
-}
-@media all and (max-width:1023px) {
-    #pc_main, .pc_margin, .pc_item{
-        display: none;
-    }
-}
-@media all and (min-width:1024px) {
-    .mobile_item{
-        display: none;
-    }
-}
 .imageWrapper{
     background-image: url("../../assets/fresh.png"); background-repeat : no-repeat;
     background-size : cover; opacity: 1;
