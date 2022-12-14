@@ -29,6 +29,6 @@ public class Catalog implements Serializable {
     private Integer price;
 
     @Column(nullable = false)
-    private Integer userIdx;
+    private Long userIdx;
 
 }

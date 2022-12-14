@@ -1,8 +1,13 @@
 package catalog_service.service;
 
+import catalog_service.client.UserServiceClient;
+import catalog_service.dto.input.CatalogDto;
+import catalog_service.dto.output.CatalogUserDto;
 import catalog_service.jpa.Catalog;
 import catalog_service.jpa.CatalogRepo;
+import catalog_service.vo.ResponseUser;
 import com.google.inject.internal.ErrorsException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,18 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class CatalogServiceImpl implements CatalogService{
+    private final CatalogRepo catalogRepo;
+    private final UserServiceClient userServiceClient;
 
-    private CatalogRepo catalogRepo;
-
-    @Autowired
-    public CatalogServiceImpl(CatalogRepo catalogRepo){
-        this.catalogRepo = catalogRepo;
-    }
 
     @Override
-    public List<Catalog> testAll(int userIdx) {
+    public List<Catalog> testAll(Long userIdx) {
         List<Catalog> catalogList = new ArrayList<>();
 //        try{
 //            catalogList = this.catalogRepo.getCatalogByUserIdx(userIdx);
@@ -34,7 +35,7 @@ public class CatalogServiceImpl implements CatalogService{
 
     @Transactional
     @Override
-    public boolean createCatalog(String name, String content, Integer stock, Integer userIdx, Integer price) {
+    public boolean createCatalog(String name, String content, Integer stock, Long userIdx, Integer price) {
         Catalog catalog = new Catalog();
         catalog.setName(name);
         catalog.setContent(content);
@@ -47,7 +48,7 @@ public class CatalogServiceImpl implements CatalogService{
 
     @Transactional
     @Override
-    public Catalog updateCatalog(Long catalogIdx, String name, String content, Integer stock, Integer price, Integer userIdx) {
+    public Catalog updateCatalog(Long catalogIdx, String name, String content, Integer stock, Integer price, Long userIdx) {
         Catalog catalog = new Catalog();
         catalog.setCatalogIdx(catalogIdx);
         catalog.setName(name);
@@ -66,7 +67,7 @@ public class CatalogServiceImpl implements CatalogService{
     }
 
     @Override
-    public Catalog getCatalog(Long catalogIdx) {
+    public CatalogUserDto getCatalog(Long catalogIdx) {
         List<Catalog> catalogList = catalogRepo.getCatalogList();
         Catalog catalog = null;
         for(int i = 0; i < catalogList.size(); i++){
@@ -74,15 +75,24 @@ public class CatalogServiceImpl implements CatalogService{
                 catalog = catalogList.get(i);
             }
         }
-        return catalog;
+        //catalogUserDto 추가
+        CatalogUserDto catalogUserDto = new CatalogUserDto();
+        catalogUserDto.setCatalog(catalog);
+        ResponseUser responseUser = userServiceClient.getResponseUser(catalog.getUserIdx());
+        catalogUserDto.setResponseUser(responseUser);
+        return catalogUserDto;
     }
 
+    //1. cateIdx catelog 조회
+    //2. catalog.getUserIdx 로 ResponseUser 받아오기
+    //3. dto 로 catalog responseUser- catalogUserDto
     @Transactional
     @Override
     public boolean deleteCatalog(Long catalogIdx) {
-        Catalog catalog = getCatalog(catalogIdx);
-        boolean res = catalogRepo.deleteCatalog(catalog);
-        return res;
+//        Catalog catalog = getCatalog(catalogIdx);
+//        boolean res = catalogRepo.deleteCatalog(catalog);
+//        return res;
+        return false;
     }
 
 
