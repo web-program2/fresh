@@ -35,8 +35,8 @@
                     <span id="loginWelcome" >{{nickName}} <p id="showRole">[{{role}}]</p></span>&nbsp;&nbsp;&nbsp;
                 </v-col>
                 <v-col cols='1'   v-if="isLogin()">
-                    <router-link to="/info">
-                        <v-btn id="infoBtn" elevation="2" outlined="outlined" rounded="rounded" >내 정보</v-btn>
+                    <router-link to="/order">
+                        <v-btn id="infoBtn" elevation="2" outlined="outlined" rounded="rounded" >주문내역</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols='1'   v-if="isLogin()">

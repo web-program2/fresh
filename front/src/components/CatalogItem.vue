@@ -1,6 +1,6 @@
 <template>
     <v-contatiner>
-        <v-row justify='center' id="ideaItem" v-on:click = "clickIdea(ideaIdx)">
+        <v-row justify='center' id="ideaItem" v-on:click = "clickCatalog(catalogIdx)">
             <v-col cols='1' />
             <v-col cols='3' class="table">
                 {{name}}
@@ -9,10 +9,10 @@
                 {{price}}
             </v-col>
             <v-col cols='3' class="table">
-                {{userName}}
+                {{stock}}
             </v-col>
             <v-col cols='2' class="table">
-                {{stock}}
+                {{content}}
             </v-col>
             <v-col cols='1' class="table"></v-col>
         </v-row>
@@ -23,12 +23,18 @@
     
     export default{
         props: [
+            "catalogIdx",
             "name",
             "price",
-            "userName",
-            "content",
             "stock",
+            "content",
+            "userIdx",
         ],
+        methods : {
+            clickCatalog(catalogIdx){
+                this.$router.push({path: `catalog/${catalogIdx}`});
+            },
+        }
     }
 
 </script>

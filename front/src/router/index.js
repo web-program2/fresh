@@ -11,6 +11,10 @@ import home from '../views/core/Home.vue';
 import catalog from '../views/core/Catalog.vue';
 import notice from '../views/core/Notice.vue';
 import about from '../views/core/About.vue';
+import order from '../views/core/Order.vue';
+
+import orderClick from '../views/core/ClickOrder.vue';
+import catalogClick from '../views/core/ClickCatalog.vue';
 
 Vue.use(VueRouter)
 
@@ -59,12 +63,24 @@ const routes = [
         component : catalog
       },
       {
+        path : 'catalog/:catalogIdx',
+        component : catalogClick,
+      },
+      {
         path : 'about',
         component : about
       },
       {
         path : 'notice',
         component : notice
+      },
+      {
+        path : 'order',
+        component : order
+      },
+      {
+        path : 'order/:orderIdx',
+        component : orderClick,
       },
 
     ]

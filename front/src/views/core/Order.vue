@@ -3,63 +3,61 @@
         <v-row justify='center'>
             <v-col cols='1' />
             <v-col cols='3' class="table">
-                상품이름
+                주문 번호
             </v-col>
             <v-col cols='2' class="table">
-                가격
+                주문 수량
             </v-col>
             <v-col cols='2' class="table">
-                재고량
+                개당 가격
             </v-col>
             <v-col cols='3' class="table">
-                내용
+                총 금액
             </v-col>
-            <v-col cols='1' class="table"></v-col>
+            <v-col cols='1' class="table" />
         </v-row>
+        <br><hr>
         <v-row justify='center'>
             <v-col cols='12'>
-                <CatalogItem style="cursor:pointer"  v-for="(item, index) in catalogItem"  :key="index" 
+                <OrderItem style="cursor:pointer"  v-for="(item, index) in orderItem"  :key="index" 
+                :orderIdx="item.orderIdx"
+                :qty="item.qty"
+                :unitPrice="item.unitPrice" 
+                :userIdx="item.userIdx"
                 :catalogIdx="item.catalogIdx"
-                :name="item.name" 
-                :price="item.price" 
-                :stock="item.stock"
-                :content="item.content"
-                :userIdx="item.userIdx" 
                 /> 
             </v-col>
         </v-row>
     </v-container>
 </template>
-
 <script>
-import CatalogItem from '../../components/CatalogItem.vue';
+import OrderItem from '../../components/OrderItem.vue';
 export default {
-    name: 'catalog',
-    created (){
-        this.settingCatalogItems();
+    created(){
+        this.settingOrderItems();
     },
     components : {
-        CatalogItem
+        OrderItem
     },
     data(){
         return {
-            
+
         }
     },
     computed : {
-        catalogItem : function(){
-            return this.$store.getters.get_catalog_items;
+        orderItem : function(){
+            return this.$store.getters.get_order_items;
         },
         userData : function(){
             return this.$store.getters.auth_get_data;
         },
     },
     methods : {
-        async settingCatalogItems(){
+        async settingOrderItems(){
             let res;
             try{
-                res= await this.$store.dispatch('setting_catalog_items', {
-
+                res= await this.$store.dispatch('setting_order_items', {
+                    userIdx : this.userData.userIdx
                 })
             }catch(err){
                 console.log(err);
@@ -67,6 +65,5 @@ export default {
             return true;
         }
     }
-    
 }
 </script>
