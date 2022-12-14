@@ -17,4 +17,6 @@ public interface CatalogService {
     CatalogUserDto getCatalog(Long catalogIdx);
 
     boolean deleteCatalog(Long catalogIdx);
+
+    Catalog findCatalog(Long catalogIdx);
 }

@@ -45,12 +45,18 @@ public class CatalogController {
         CatalogUserDto catalogUserDto = catalogService.getCatalog(catalogIdx);
         return catalogUserDto;
     }
+    @PostMapping("/response_catalog")
+    public Catalog getResponseCatalog(@RequestBody Long catalogIdx){
+        Catalog catalog = catalogService.findCatalog(catalogIdx);
+        return catalog;
+    }
 
     @GetMapping("/catalog_list")
     public List<Catalog> getCatalogList(){
         List<Catalog> catalogList = catalogService.getCatalogList();
         return catalogList;
     }
+
     @PutMapping("")
     public Catalog updateCatalog(@RequestBody CatalogDto catalogDto){
         Catalog res = catalogService.updateCatalog(catalogDto.getCatalogIdx(),
