@@ -1,5 +1,18 @@
 <template>
     <v-container>
+        <v-row justify="center">
+            <v-col cols="8" />
+            <v-col cols="2">
+                <router-link to="/add-catalog">
+                    <v-col cols='1'  >
+                        <v-btn block outlined  style="height : 60px" v-on:click="createCatalog()">
+                            상품 등록하기
+                        </v-btn>
+                    </v-col>
+                </router-link>
+            </v-col>
+            <v-col cols="2" />
+        </v-row>
         <v-row justify='center'>
             <v-col cols='1' />
             <v-col cols='3' class="table">
@@ -59,12 +72,17 @@ export default {
             let res;
             try{
                 res= await this.$store.dispatch('setting_catalog_items', {
-
                 })
             }catch(err){
                 console.log(err);
             }
             return true;
+        },
+        createCatalog(){
+            if(this.userData.role !== 'seller'){
+                alert('판매자만 상품을 판매할 수 있습니다.'); return;
+            }
+            
         }
     }
     

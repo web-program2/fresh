@@ -4,33 +4,16 @@ import {catalog as catalogService} from '../../service';
 
 const catalog = {
     state:{
-        catalogs : [
-            {
-                name : 'aaaa',
-                price : '12312',
-                user : {
-                    name : 'afdaadsfasaa'
-                },
-                stock : 11
-            },
-            {
-                name : 'bbb',
-                price : '12312',
-                user : {
-                    name : 'dfas'
-                },
-                stock : 11
-            },
-        ],
+        catalogList : [],
     },
     getters:{
         get_catalog_items(state){
-            return state.catalogs;
+            return state.catalogList;
         }
     },
     mutations: {
         catalog_set_items(state, data){
-            state.catalogs= data;
+            state.catalogList= data;
         }
     },
     actions:{

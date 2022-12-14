@@ -8,7 +8,7 @@ const getCatalogItems = async (data)=> {
     }catch(err){
         throw new Error(err.message);
     }
-    return res
+    return res;
 }
 const createCatalogItem = async (data)=> {
     let res;

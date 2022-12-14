@@ -16,6 +16,8 @@ import order from '../views/core/Order.vue';
 import orderClick from '../views/core/ClickOrder.vue';
 import catalogClick from '../views/core/ClickCatalog.vue';
 
+import addCatalog from '../components/AddCatalog.vue';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -65,6 +67,10 @@ const routes = [
       {
         path : 'catalog/:catalogIdx',
         component : catalogClick,
+      },
+      {
+        path : 'add-catalog',
+        component : addCatalog,
       },
       {
         path : 'about',
