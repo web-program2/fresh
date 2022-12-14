@@ -87,10 +87,15 @@ public class CatalogServiceImpl implements CatalogService{
     @Transactional
     @Override
     public boolean deleteCatalog(Long catalogIdx) {
-//        Catalog catalog = getCatalog(catalogIdx);
-//        boolean res = catalogRepo.deleteCatalog(catalog);
-//        return res;
-        return false;
+        List<Catalog> catalogList = catalogRepo.getCatalogList();
+        Catalog catalog = null;
+        for(int i = 0; i < catalogList.size(); i++){
+            if(catalogList.get(i).getCatalogIdx() == catalogIdx){
+                catalog = catalogList.get(i);
+            }
+        }
+        boolean res = catalogRepo.deleteCatalog(catalog);
+        return res;
     }
 
     @Override
