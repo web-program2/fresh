@@ -99,6 +99,7 @@ public class CatalogServiceImpl implements CatalogService{
         return catalog;
     }
 
+    @Transactional
     @Override
     public void updateStock(Long catalogIdx, Integer qty) {
         List<Catalog> catalogList = catalogRepo.getCatalogList();
