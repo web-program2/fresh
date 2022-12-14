@@ -34,10 +34,21 @@ const createCatalogItem = async (data)=> {
     }catch(err){
         throw new Error(err.message);
     }
-    return res
+    return res;
+}
+const deleteCatalog = async (catalogIdx)=> {
+    let res;
+    try{
+        res = await axios.delete(`http://localhost:8000/catalog-service/${catalogIdx}`, {
+            catalogIdx : catalogIdx
+        })
+    }catch(err){
+        throw new Error(err.message);
+    }
+    return res;
 }
 
 export default {
     getCatalogItems, createCatalogItem,
-    getCatalog
+    getCatalog, deleteCatalog
 }

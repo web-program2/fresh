@@ -78,9 +78,10 @@ export default {
             return true;
         },
         createCatalog(){
-            if(this.userData.role !== 'seller'){
-                alert('판매자만 상품을 판매할 수 있습니다.'); return;
-            }
+            // if(this.userData.role !== 'seller'){
+            //     alert('판매자만 상품을 판매할 수 있습니다.'); 
+            //     this.$router.go(-1);  return;
+            // }
             
         }
     }

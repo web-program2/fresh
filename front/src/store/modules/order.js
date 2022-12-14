@@ -5,16 +5,22 @@ import {order as orderService} from '../../service';
 const order = {
     state:{
         orderList : [],
+        orderData : {},
     },
-    getter:{
+    getters:{
         get_order_items(state){
             return state.orderList;
+        },
+        get_order_data(state){
+            return state.orderData;
         }
     },
     mutations: {
         order_set_items(state, data){
-            state.catalogs= data;
-            console.log(state.catalogs)
+            state.orderList= data;
+        },
+        set_order_data(state, data){
+            state.orderData = data;
         }
     },
     actions:{
@@ -26,7 +32,19 @@ const order = {
                 console.log(err.message);
             }
             commit('order_set_items', res.data);
+            return;
         },
+        async get_order({commit}, data){
+            console.log(data.orderIdx)
+            let res;
+            try{
+                res = await orderService.getOrderData(data.orderIdx);
+            }catch(err){
+                console.log(err);
+            }
+            console.log(res.data)
+            commit('set_order_data', res.data);
+        }
     }
 }
 

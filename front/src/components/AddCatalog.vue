@@ -94,6 +94,9 @@ export default {
             }catch(err){
                 console.log(err);
             }
+            alert('상품을 성공적으로 추가했습니다.');
+            this.$router.push('/');
+            return;
 
         }
     }
