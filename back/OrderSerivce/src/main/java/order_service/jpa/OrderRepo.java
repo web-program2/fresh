@@ -17,10 +17,9 @@ public class OrderRepo{
 //        em.persist(orderEntity);
     }
     public List<Order> getOrderListbyUserIdx(Long userIdx) {
-//        return em.createQuery("select m from Order m where m.userIdx = :userIdx", Order.class)
-//                .setParameter("userIdx", userIdx)
-//                .getResultList();
-        return null;
+        return em.createQuery("select m from Order m where m.userIdx = :userIdx", Order.class)
+                .setParameter("userIdx", userIdx)
+                .getResultList();
     }
 
 }

@@ -14,18 +14,17 @@ const order = {
     mutations: {
         order_set_items(state, data){
             state.catalogs= data;
+            console.log(state.catalogs)
         }
     },
     actions:{
         async setting_order_items({commit}, data){
-            console.log(data);
             let res;
             try {
                 res = await orderService.getOrderList(data.userIdx);
             }catch(err){
                 console.log(err.message);
             }
-            console.log(res);
             commit('order_set_items', res.data);
         },
     }

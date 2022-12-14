@@ -17,8 +17,10 @@ public class OrderController {
 
 
     //userIdx requestbody
-    @GetMapping("/order_list")
+    @PostMapping("/orders")
     public List<Order> getOrderList(@RequestBody ResponseUser responseUser) {
+        System.out.println("afdsafasfsafa");
+        System.out.println(responseUser.getUserIdx());
         List<Order> orderList = orderService.getOrderListbyUserIdx(responseUser.getUserIdx());
         return orderList;
     }
