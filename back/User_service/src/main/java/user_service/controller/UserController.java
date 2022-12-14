@@ -1,7 +1,6 @@
 package user_service.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.input.InputData;
@@ -84,4 +83,5 @@ public class UserController {
         User user = userService.getUser(userIdx);
         return user;
     }
+
 }

@@ -99,5 +99,17 @@ public class CatalogServiceImpl implements CatalogService{
         return catalog;
     }
 
+    @Override
+    public void updateStock(Long catalogIdx, Integer qty) {
+        List<Catalog> catalogList = catalogRepo.getCatalogList();
+        Catalog catalog = null;
+        for(int i = 0; i < catalogList.size(); i++){
+            if(catalogList.get(i).getCatalogIdx() == catalogIdx){
+                catalog = catalogList.get(i);
+            }
+        }
+        catalogRepo.updateStock(catalogIdx, catalog.getStock()-qty);
+    }
+
 
 }

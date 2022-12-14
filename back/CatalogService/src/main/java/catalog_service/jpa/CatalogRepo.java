@@ -41,4 +41,11 @@ public class CatalogRepo {
                 .setParameter("catalogIdx", catalogIdx)
                 .getResultList();
     }
+
+    public void updateStock(Long catalogIdx, Integer stock) {
+        em.createQuery(
+                        "UPDATE Catalog c set c.stock = :stock where c.catalogIdx = :catalogIdx")
+                .setParameter("catalogIdx", catalogIdx)
+                .setParameter("stock", stock).executeUpdate();
+    }
 }

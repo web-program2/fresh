@@ -1,6 +1,7 @@
 package catalog_service.controller;
 
 import catalog_service.dto.input.CatalogDto;
+import catalog_service.dto.input.OrderqtyDto;
 import catalog_service.dto.output.CatalogUserDto;
 import catalog_service.jpa.Catalog;
 import catalog_service.service.CatalogService;
@@ -32,7 +33,7 @@ public class CatalogController {
         return "aaa";
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public boolean createCatalog(@RequestBody CatalogDto catalogDto){
         boolean res = catalogService.createCatalog(catalogDto.getName(), catalogDto.getContent(), catalogDto.getStock(),
                 catalogDto.getUserIdx(), catalogDto.getPrice()
@@ -70,5 +71,10 @@ public class CatalogController {
     public boolean deleteCatalog(@PathVariable Long catalogIdx){
         boolean res = catalogService.deleteCatalog(catalogIdx);
         return res;
+    }
+
+    @PostMapping("/request_stock")
+    public void requestStock(@RequestBody OrderqtyDto orderqtyDto){
+        catalogService.updateStock(orderqtyDto.getCatalogIdx(), orderqtyDto.getQty());
     }
 }

@@ -4,6 +4,7 @@ import order_service.client.CatalogServiceClient;
 import order_service.client.UserServiceClient;
 import order_service.dto.OrderCatalogUserDto;
 import order_service.dto.OrderDto;
+import order_service.dto.OrderqtyDto;
 import order_service.jpa.Order;
 import lombok.RequiredArgsConstructor;
 import order_service.jpa.OrderRepo;
@@ -26,20 +27,6 @@ public class OrderServiceImpl implements OrderService{
     private final CatalogServiceClient catalogServiceClient;
 
     private final UserServiceClient userServiceClient;
-
-//    @Transactional
-//    @Override
-//    public OrderDto createOrder(OrderDto orderDetails) {
-//        orderDetails.setOrderId(UUID.randomUUID().toString());
-//        ModelMapper modelMapper = new ModelMapper();
-//        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//
-//        Order orderEntity = modelMapper.map(orderDetails, Order.class);
-//        orderRepo.save(orderEntity);
-//
-//        OrderDto returnValue = modelMapper.map(orderEntity, OrderDto.class);
-//        return returnValue;
-//    }
 
     @Override
     public List<Order> getOrderListbyUserIdx(Long userIdx) {
@@ -72,7 +59,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public Order createOrder(Long userIdx, Long catalogIdx, Integer qty, Integer price) {
         // 1. catalog -> qty 만큼 stock 줄여서 업데이트해야됨.
+        OrderqtyDto orderqtyDto = new OrderqtyDto();
+        orderqtyDto.setCatalogIdx(catalogIdx);
+        orderqtyDto.setQty(qty);
 
+        catalogServiceClient.requestStock(orderqtyDto);
 
         // 2. 저장
         Order order = new Order();

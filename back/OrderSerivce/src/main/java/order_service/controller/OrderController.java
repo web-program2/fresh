@@ -29,7 +29,7 @@ public class OrderController {
         return orderService.createOrder(createOrderDTO.getUserIdx(), createOrderDTO.getCatalogIdx(),
                 createOrderDTO.getQty(), createOrderDTO.getPrice());
     }
-    @PostMapping("/{orderIdx}")
+    @GetMapping("/{orderIdx}")
     public OrderCatalogUserDto getOrder(@PathVariable Long orderIdx) {
         OrderCatalogUserDto orderCatalogUserDto = orderService.getOrder(orderIdx);
         return orderCatalogUserDto;

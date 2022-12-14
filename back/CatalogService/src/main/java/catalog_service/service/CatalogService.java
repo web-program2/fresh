@@ -19,4 +19,6 @@ public interface CatalogService {
     boolean deleteCatalog(Long catalogIdx);
 
     Catalog findCatalog(Long catalogIdx);
+
+    void updateStock(Long catalogIdx, Integer qty);
 }
