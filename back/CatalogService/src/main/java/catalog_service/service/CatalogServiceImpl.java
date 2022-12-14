@@ -66,6 +66,7 @@ public class CatalogServiceImpl implements CatalogService{
         return catalogList;
     }
 
+    //catalogIdx로 User+Catalog 가져오기
     @Override
     public CatalogUserDto getCatalog(Long catalogIdx) {
         List<Catalog> catalogList = catalogRepo.getCatalogList();
@@ -83,9 +84,6 @@ public class CatalogServiceImpl implements CatalogService{
         return catalogUserDto;
     }
 
-    //1. cateIdx catelog 조회
-    //2. catalog.getUserIdx 로 ResponseUser 받아오기
-    //3. dto 로 catalog responseUser- catalogUserDto
     @Transactional
     @Override
     public boolean deleteCatalog(Long catalogIdx) {
