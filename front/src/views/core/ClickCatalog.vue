@@ -153,7 +153,7 @@ export default {
             this.$router.push('/');
         },
         async deleteCatalog(){
-            const catalogIdx =  catalogData.catalog.catalogIdx;
+            const catalogIdx =  this.catalogData.catalog.catalogIdx;
             let flag = confirm('정말 삭제하시겠습니까 ?');
             if(!flag) return;
             try{
