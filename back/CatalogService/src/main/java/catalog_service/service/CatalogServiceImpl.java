@@ -93,6 +93,11 @@ public class CatalogServiceImpl implements CatalogService{
         return false;
     }
 
+    @Override
+    public Catalog findCatalog(Long catalogIdx) {
+        Catalog catalog = catalogRepo.getCatalogbyIdx(catalogIdx).get(0);
+        return catalog;
+    }
 
 
 }

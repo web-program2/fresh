@@ -35,4 +35,10 @@ public class CatalogRepo {
         em.remove(catalog);
         return true;
     }
+
+    public List<Catalog> getCatalogbyIdx(Long catalogIdx) {
+        return em.createQuery("select m from Catalog m where m.catalogIdx = :catalogIdx", Catalog.class)
+                .setParameter("catalogIdx", catalogIdx)
+                .getResultList();
+    }
 }

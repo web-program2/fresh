@@ -13,13 +13,20 @@ import java.util.List;
 public class OrderRepo{
 
     private final EntityManager em;
-    public void save(Order orderEntity) {
-//        em.persist(orderEntity);
-    }
+
     public List<Order> getOrderListbyUserIdx(Long userIdx) {
         return em.createQuery("select m from Order m where m.userIdx = :userIdx", Order.class)
                 .setParameter("userIdx", userIdx)
                 .getResultList();
     }
 
+    public List<Order> getOrderListbyOrderIdx(Long orderIdx) {
+        return em.createQuery("select m from Order m where m.orderIdx = :orderIdx", Order.class)
+                .setParameter("orderIdx", orderIdx)
+                .getResultList();
+    }
+
+    public void createOrder(Order order) {
+        em.persist(order);
+    }
 }
