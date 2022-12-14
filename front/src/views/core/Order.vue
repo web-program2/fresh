@@ -16,10 +16,10 @@
             </v-col>
             <v-col cols='1' class="table" />
         </v-row>
-        <br><hr>
+        <br><hr> <br>
         <v-row justify='center'>
             <v-col cols='12'>
-                <OrderItem style="cursor:pointer"  v-for="(item, index) in orderItem"  :key="index" 
+                <OrderItem style="cursor:pointer"  v-for="(item, index) in orderList"  :key="index" 
                 :orderIdx="item.orderIdx"
                 :qty="item.qty"
                 :unitPrice="item.unitPrice" 
@@ -45,7 +45,7 @@ export default {
         }
     },
     computed : {
-        orderItem : function(){
+        orderList : function(){
             return this.$store.getters.get_order_items;
         },
         userData : function(){
@@ -63,7 +63,7 @@ export default {
                 console.log(err);
             }
             return true;
-        }
+        },
     }
 }
 </script>

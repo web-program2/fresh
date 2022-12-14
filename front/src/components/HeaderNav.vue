@@ -99,8 +99,10 @@
                }
             },
             async logout(){
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
                 try{
-                    await this.$store.dispatch('logout', this.userData.userIdx);
+                    
                 }catch(err){
                     console.log(err);
                 }
