@@ -13,8 +13,8 @@ import notice from '../views/core/Notice.vue';
 import about from '../views/core/About.vue';
 import order from '../views/core/Order.vue';
 
-import orderClick from '../views/core/ClickOrder.vue';
-import catalogClick from '../views/core/ClickCatalog.vue';
+import clickOrder from '../views/core/ClickOrder.vue';
+import clickCatalog from '../views/core/ClickCatalog.vue';
 
 import addCatalog from '../components/AddCatalog.vue';
 
@@ -66,7 +66,7 @@ const routes = [
       },
       {
         path : 'catalog/:catalogIdx',
-        component : catalogClick,
+        component : clickCatalog,
       },
       {
         path : 'add-catalog',
@@ -86,7 +86,7 @@ const routes = [
       },
       {
         path : 'order/:orderIdx',
-        component : orderClick,
+        component : clickOrder,
       },
 
     ]
