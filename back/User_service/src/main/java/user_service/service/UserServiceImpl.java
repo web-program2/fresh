@@ -102,6 +102,12 @@ public class UserServiceImpl implements UserService{
         return userCatalogDto;
     }
 
+    @Override
+    public User getUser(Long userIdx) {
+        User user = userRepo.getUserByIdx(userIdx).get(0);
+        return user;
+    }
+
     @Transactional
     @Override
     public boolean sendMail(String email) {
@@ -124,7 +130,7 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException();
         }
     }
-
+    @Transactional
     @Override
     public boolean checkMailNo(String email, String no) {
         List<EmailNo> emailNoList = userRepo.getEmailNosByEmail(email);

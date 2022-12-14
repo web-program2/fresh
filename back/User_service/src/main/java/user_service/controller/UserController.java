@@ -7,6 +7,7 @@ import user_service.dto.UserCatalogDto;
 import user_service.dto.input.InputData;
 import user_service.dto.input.LoginInputDto;
 import user_service.dto.output.LoginOutputDto;
+import user_service.jpa.User;
 import user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import javax.mail.MessagingException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user-service")
+@RequestMapping(value = "/user-service", method = {RequestMethod.GET, RequestMethod.POST})
 public class UserController {
     private final UserService userService;
 
@@ -50,6 +51,8 @@ public class UserController {
     @PostMapping("/check_nickname")
     public boolean duplicatedNickName(@RequestBody InputData data){
         boolean res = userService.duplicatedNickName(data.getNickName());
+        System.out.println(data.getNickName());
+        System.out.println(res);
         return res;
     }
 
@@ -69,12 +72,16 @@ public class UserController {
         return userService.sendMail(inputData.getEmail());
     }
 
-    @Transactional
+
     @PostMapping("/check_mail_no")
     public boolean checkMailNo(@RequestBody InputData inputData){
         System.out.println(inputData.getNo());
         return userService.checkMailNo(inputData.getEmail(), inputData.getNo());
     }
 
-
+    @PostMapping("/response_user")
+    public User getResponseUser(@RequestBody Long userIdx){
+        User user = userService.getUser(userIdx);
+        return user;
+    }
 }

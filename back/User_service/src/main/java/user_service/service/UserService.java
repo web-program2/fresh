@@ -3,6 +3,7 @@ package user_service.service;
 
 import user_service.dto.UserCatalogDto;
 import user_service.dto.output.LoginOutputDto;
+import user_service.jpa.User;
 
 public interface UserService {
 
@@ -13,6 +14,8 @@ public interface UserService {
 
 
     UserCatalogDto testAll(int userIdx);
+
+    User getUser(Long userIdx);
 
     boolean sendMail(String email);
 

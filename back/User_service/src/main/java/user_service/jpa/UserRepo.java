@@ -32,6 +32,7 @@ public class UserRepo{
 
     public User findByUserIdPw(String id, String pw) {
         List<User> userList = findAll();
+        System.out.println(userList);
         User res = new User();
         for(int i =0; i < userList.size(); i++){
             User user = userList.get(i);

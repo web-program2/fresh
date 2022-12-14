@@ -1,6 +1,7 @@
 package catalog_service.controller;
 
 import catalog_service.dto.input.CatalogDto;
+import catalog_service.dto.output.CatalogUserDto;
 import catalog_service.jpa.Catalog;
 import catalog_service.service.CatalogService;
 import org.modelmapper.ModelMapper;
@@ -13,11 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/catalog-service")
+@RequestMapping(value = "/catalog-service" )
 public class CatalogController {
 
     CatalogService catalogService;
-//
     @Autowired
     public CatalogController(CatalogService catalogService) {
         this.catalogService = catalogService;
@@ -39,29 +39,28 @@ public class CatalogController {
         );
         return res;
     }
+
+    @GetMapping("/{catalogIdx}")
+    public CatalogUserDto getCatalog(@PathVariable Long catalogIdx){
+        CatalogUserDto catalogUserDto = catalogService.getCatalog(catalogIdx);
+        return catalogUserDto;
+    }
+    @GetMapping("/test")
+    public  String test(){
+        return "aaa";
+    }
+
     @GetMapping()
     public List<Catalog> getCatalogList(){
         List<Catalog> catalogList = catalogService.getCatalogList();
+        //상품 - 작성자 다 가지고 오기
         return catalogList;
     }
+
+
     @DeleteMapping("/{catalogIdx}")
     public boolean deleteCatalog(@PathVariable Long catalogIdx){
         boolean res = catalogService.deleteCatalog(catalogIdx);
         return res;
     }
-    @GetMapping("/{catalogIdx}")
-    public Catalog getCatalog(@PathVariable Long catalogIdx){
-        Catalog catalog;
-        catalog = catalogService.getCatalog(catalogIdx);
-        return catalog;
-    }
-
-    @PostMapping("/all")
-    public List<Catalog> test(@RequestBody int userIdx){
-        List<Catalog> catalogList = catalogService.testAll(userIdx);
-        System.out.println(catalogList);
-        return catalogList;
-    }
-
-
 }

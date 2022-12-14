@@ -16,5 +16,5 @@ public class CatalogDto implements Serializable {
     private Integer stock;
     private Integer price;
 
-    private Integer userIdx;
+    private Long userIdx;
 }
