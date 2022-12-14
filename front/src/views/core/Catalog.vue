@@ -24,14 +24,13 @@
             <v-col cols='2' class="table">
                 재고량
             </v-col>
-            <v-col cols='3' class="table">
+            <v-col cols='4' class="table">
                 내용
             </v-col>
-            <v-col cols='1' class="table"></v-col>
         </v-row>
         <v-row justify='center'>
             <v-col cols='12'>
-                <CatalogItem style="cursor:pointer"  v-for="(item, index) in catalogItem"  :key="index" 
+                <CatalogItem style="cursor:pointer"  v-for="(item, index) in catalogList"  :key="index" 
                 :catalogIdx="item.catalogIdx"
                 :name="item.name" 
                 :price="item.price" 
@@ -60,7 +59,7 @@ export default {
         }
     },
     computed : {
-        catalogItem : function(){
+        catalogList : function(){
             return this.$store.getters.get_catalog_items;
         },
         userData : function(){
