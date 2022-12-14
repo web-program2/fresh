@@ -10,4 +10,5 @@ import java.util.List;
 public class UserCatalogDto {
     private User user;
     private List<ResponseCatalog> catalogList;
+    //temp
 }

@@ -95,6 +95,23 @@
         </v-col>
       </v-row>
       <v-row justify="center">
+        <v-radio-group
+          v-model="role"
+          row
+        >
+          <v-radio
+            label="구매자"
+            value="buyer"
+          >
+          </v-radio>
+          <v-radio
+            label="판매자"
+            value="seller"
+          >
+          </v-radio>
+        </v-radio-group>
+      </v-row>
+      <v-row justify="center">
         <v-col cols="4" >
           <v-btn
             elevation="2" block
@@ -114,121 +131,6 @@
       </v-row>
       <br>
     </v-container>
-    
-    <!-- mobile version -->
-    <v-container class="mobile">
-      <v-row justify="center">
-        <v-col cols='8'>
-          <v-text-field
-              label="cvzvxzvzxvxc 입력"
-              v-model="id"
-              :rules="idRules"
-              hide-details="auto"
-              :readonly="overlapId"
-            ></v-text-field>
-        </v-col>
-        <v-col cols='2'>
-          <v-btn
-              elevation="4" block
-              v-on:click="checkId"
-            >중복</v-btn>
-        </v-col>
-      </v-row>
-      <br>
-
-      <v-row justify="center">
-        <v-col cols='10'>
-          <div>
-            <v-text-field
-              label="비밀번호 입력"
-              v-model="pw"
-              :rules="pwRules"
-              hide-details="auto"
-              :type="show1 ? 'text' : 'password'"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="show1 = !show1"
-            ></v-text-field>
-            <v-text-field
-              label="비밀번호 재확인"
-              v-model="checkPw"
-              :rules="checkPwRules"
-              hide-details="auto"
-              :type="show2 ? 'text' : 'password'"
-              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="show2 = !show2"
-            ></v-text-field>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col cols='8'>
-          <v-text-field
-              label="닉네임 입력"
-              v-model="nickName" 
-              :rules="checkNickNameRules"
-              hide-details="auto"
-              :readonly="overlapNickName"
-            ></v-text-field>
-        </v-col>
-        <v-col cols='2'>
-          <v-btn
-              elevation="2" block
-              v-on:click="checkNickName"
-            >중복</v-btn>
-        </v-col>
-      </v-row>
-      <br>
-            <!-- 이메일 -->
-      <v-row justify="center">
-        <v-col cols='8'>
-          <v-text-field
-            label="이메일 입력"
-            v-model="email"
-            hide-details="auto"
-            :readonly="overlapEmail"
-          ></v-text-field>
-        </v-col>
-        <v-col cols='2'>
-          <v-btn
-              elevation="2" block v-on:click="sendEmail()"
-            >인증번호</v-btn>  
-        </v-col>
-      </v-row>
-      <!-- 이메일 인증번호 -->
-      <v-row justify="center" v-if="authEmailIf">
-        <v-col cols='8'>
-          <v-text-field
-            label="인증번호 입력"
-            v-model="authEmail"
-            hide-details="auto"
-            :readonly="overlapAuthentication"
-          ></v-text-field>
-        </v-col>
-        <v-col cols='2'>
-          <v-btn
-              elevation="2" block v-on:click="checkAuthEmail()"
-            >확인</v-btn>  
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col cols="6" >
-          <v-btn
-            elevation="2" block
-            v-on:click="signUp()" >
-            회원가입 하기
-          </v-btn>
-        </v-col>      
-      </v-row>
-      <v-row justify="center">
-        <v-col cols='8'>
-          <div style="text-align: center;">
-            <router-link to="/auth/findId">아이디찾기</router-link> <br>
-            <router-link to="/auth/findPw">비밀번호찾기</router-link> <br>
-            <router-link to="/auth/signIn">로그인하기</router-link>
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
   </v-container>
 </template>
 
@@ -247,7 +149,7 @@
         pw : 'aaa111!',
         checkPw : 'aaa111!',
         nickName : 'dsfa12312',
-        email : 'mdfaf2@naver.com', 
+        email : 'fdasf12312@naver.com', 
         show1: false, show2 : false,
         idRules: [
           value => !!value || '영어, 숫자 합쳐서 6글자 이상 만들어주세요.',
@@ -272,12 +174,14 @@
         authEmailIf : false,
         authEmail : '',
         overlapAuthentication : false,
+        role : 'buyer'
       }
     },
 
     methods : {
       // 중복 아이디 확인 axios
       async checkId(){
+        console.log(this.row)
         /////////////////////////////////전처리/////////////////////////////////
         const preorder = signValidation.checkId(this.id);
         if(preorder.message){
@@ -348,11 +252,8 @@
         }catch(err){
           console.log(err);
         }
-        if(res.message === 'exist email'){
-          alert('이미 존재하는 이메일입니다.'); return;
-        }
         if(!res){
-          alert('이메일 전송에 오류가 생겼습니다. 잠시 후 다시 시도해주세요..'); return;
+          alert('이미 존재하는 이메일입니다.'); return;
         }
         this.authEmailIf = true;
         this.overlapEmail = true;
@@ -370,38 +271,35 @@
             no : this.authEmail
           })
         }catch(err){
-          if(err.message){
-            alert('인증번호가 일치하지 않습니다.'); return;
-          }else {
             alert('인증에 실패했습니다.'); this.overlapAuthentication = false; return;
-          }
         }
-        if(res){
-          alert('인증이 완료되었습니다.');
-          this.authEmailIf = false;
-          this.overlapAuthentication = true;
+        if(!res){
+          alert('인증번호가 일치하지 않습니다.'); return;
         }
+        alert('인증이 완료되었습니다.');
+        this.authEmailIf = false;
+        this.overlapAuthentication = true;
       },
       // 회원가입 axious
       async signUp(){
         /////////////////////////////////전처리/////////////////////////////////
-        if(this.pw !== this.checkPw){
-          alert('비밀번호가 일치하지 않습니다.!'); return;
-        }
-        const preorder = signValidation.checkPw(this.pw);
-        if(preorder.message){
-          alert(preorder.message); return;
-        }
-        if(!this.overlapId) {
-          alert('아이디 중복확인을 해주세요'); return;
-        }else if(!this.overlapNickName){
-          alert('닉네임 중복확인을 해주세요'); return;
-        }else if(!this.overlapAuthentication){
-          alert('이메일 인증을 해주세요'); return;
-        }
-        if(!this.overlapId || !this.overlapNickName || !this.overlapAuthentication){
-          alert('중복확인을 해주세요'); return;
-        }
+        // if(this.pw !== this.checkPw){
+        //   alert('비밀번호가 일치하지 않습니다.!'); return;
+        // }
+        // const preorder = signValidation.checkPw(this.pw);
+        // if(preorder.message){
+        //   alert(preorder.message); return;
+        // }
+        // if(!this.overlapId) {
+        //   alert('아이디 중복확인을 해주세요'); return;
+        // }else if(!this.overlapNickName){
+        //   alert('닉네임 중복확인을 해주세요'); return;
+        // }else if(!this.overlapAuthentication){
+        //   alert('이메일 인증을 해주세요'); return;
+        // }
+        // if(!this.overlapId || !this.overlapNickName || !this.overlapAuthentication){
+        //   alert('중복확인을 해주세요'); return;
+        // }
         ///////////////////////////////////////////////////////////////////////
         let res;
         try{
@@ -409,14 +307,14 @@
             id : this.id,
             pw : this.pw,
             nickName : this.nickName,
-            email : this.email
+            email : this.email,
+            role : this.role
           })
         }catch(err){
           console.log(err);
         }
-        if(!res.userIdx){
-          alert('문제가 생겼습니다. 다시 시도해주세요.'); return;
-        }
+        console.log(res);
+
         alert('회원가입이 성공적으로 완료됐습니다!');
         history.back();
         return;

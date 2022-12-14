@@ -36,12 +36,22 @@ const anonymous = {
         async send_email({commit},data){
             let res;
             try{
-                res = anonymousService.sendEmail(data.email);
+                res = await anonymousService.sendEmail(data.email);
             }catch(err){
                 console.log(err);
             }
             // 존재하면 true, 안 존재하면 false
-            return false;
+            return res.data;
+        },
+        async check_auth_email({commit}, data){
+            const {email, no} = data;
+            let res;
+            try{
+                res = await anonymousService.checkAuthEmail(email, no);
+            }catch(err){
+                console.log(err.message);
+            }
+            return res.data
         },
         async sign_in({commit}, input){
             const {id, pw, isForce} = input;
@@ -65,6 +75,9 @@ const anonymous = {
             return res;
             // 존재하면 true, 안 존재하면 false
         },
+        async sign_up({commit}, data) {
+            console.log(data);
+        }
         
     }
 }

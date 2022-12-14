@@ -51,7 +51,11 @@ public class UserRepo{
                 .getResultList();
     }
     public void updateUserToken(Long userIdx, String accessToken) {
-        em.createQuery();
+        em.createQuery(
+                "UPDATE UserToken u set u.token = :token where u.userIdx = :userIdx")
+                .setParameter("userIdx", userIdx)
+                .setParameter("token", accessToken)
+                .executeUpdate();
     }
 
 
@@ -61,7 +65,39 @@ public class UserRepo{
                 .getResultList();
     }
 
-    public void createEmailNo(String email, String randomNo) {
-        em.createQuery();
+    public void createEmailNo(String email, String no) {
+        em.createNativeQuery("INSERT INTO email_nos (email, no) VALUES (?,?)")
+                .setParameter(1, email)
+                .setParameter(2, no)
+                .executeUpdate();
+    }
+
+    public void createUser(User user) {
+        em.persist(user);
+    }
+
+    public void createUserToken(Long userIdx) {
+        em.createNativeQuery("INSERT INTO user_tokens (userIdx, token) VALUES (?,?)")
+                .setParameter(1, userIdx)
+                .setParameter(2,"")
+                .executeUpdate();
+    }
+
+    public List<User> findByUserEmail(String email) {
+        return em.createQuery("select m from User m where m.email = :email", User.class)
+                .setParameter("email", email)
+                .getResultList();
+    }
+
+    public List<EmailNo> getEmailNosByEmail(String email) {
+        return em.createQuery("select m from EmailNo m where m.email = :email", EmailNo.class)
+                .setParameter("email", email)
+                .getResultList();
+    }
+
+    public void deleteEmailNosByEmail(String email) {
+        em.createQuery("DELETE from EmailNo e where e.email = :email")
+                .setParameter("email", email)
+                .executeUpdate();
     }
 }

@@ -11,4 +11,5 @@ public class InputData {
     private String nickName;
     private String email;
     private String role;
+    private String no;
 }

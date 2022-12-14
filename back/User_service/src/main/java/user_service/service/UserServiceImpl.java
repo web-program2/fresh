@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.transaction.annotation.Transactional;
 import user_service.client.CatalogServiceClient;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.output.LoginOutputDto;
+import user_service.jpa.EmailNo;
 import user_service.jpa.User;
 import user_service.jpa.UserRepo;
 import user_service.jpa.UserToken;
@@ -42,6 +44,7 @@ public class UserServiceImpl implements UserService{
         return flag;
     }
 
+    @Transactional
     @Override
     public LoginOutputDto signIn(String id, String pw, boolean isForce) throws Exception {
         // 1. id pw로 user 찾아오기
@@ -50,7 +53,7 @@ public class UserServiceImpl implements UserService{
         if(user.getUserIdx() == null){
             throw new Exception("not found");
         }
-
+        System.out.println(isForce);
         if(!isForce){
             // 2. 해당 유저가 로그인되어져 있는지 확인해보기
             List<UserToken> userTokenList = userRepo.findUserToken(user.getUserIdx());
@@ -60,8 +63,7 @@ public class UserServiceImpl implements UserService{
             }
         }
 
-        // 3. pw와 같은 민감한 데이터는 삭제 후 토큰을 발급.
-        user.setPw("");
+        // 3. 토큰을 발급.
         String accessToken = this.generateAccessToken(user);
         String refreshToken = this.generateRefreshToken();
         // 3. 해당 로그인 하는 유저의 토큰을 저장
@@ -74,9 +76,18 @@ public class UserServiceImpl implements UserService{
         return res;
     }
 
+    @Transactional
     @Override
     public boolean signUp(String id, String pw, String email, String nickName, String role) {
-//        userRepo.saveUser();
+        User user = new User();
+        user.setId(id);
+        user.setPw(pw);
+        user.setEmail(email);
+        user.setNickName(nickName);
+        user.setRole(role);
+        userRepo.createUser(user);
+        User resUser = userRepo.findByUserIdPw(id, pw);
+        userRepo.createUserToken(resUser.getUserIdx());
         return true;
     }
 
@@ -91,21 +102,38 @@ public class UserServiceImpl implements UserService{
         return userCatalogDto;
     }
 
+    @Transactional
     @Override
     public boolean sendMail(String email) {
+        List<User> userList = userRepo.findByUserEmail(email);
+        if(userList.size() != 0){
+            return false;
+        }
         try {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail,false,"UTF-8");
             String randomNo = generateAuthentication();
-            mailHelper.setTo("lch010201@naver.com");
+            mailHelper.setTo(email);
             mailHelper.setSubject("Fresh 인증번호");
             String text = "Fresh 인증번호 : " + randomNo + " 입니다. ";
             mailHelper.setText(text, true);
             mailSender.send(mail);
-            this.userRepo.createEmailNo(email, randomNo);
+            userRepo.createEmailNo(email, randomNo);
             return true;
         }catch(MessagingException e) {
             throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public boolean checkMailNo(String email, String no) {
+        List<EmailNo> emailNoList = userRepo.getEmailNosByEmail(email);
+        EmailNo emailNo = emailNoList.get(emailNoList.size()-1);
+        if(emailNo.getNo().equals(no)){
+            userRepo.deleteEmailNosByEmail(email);
+            return true;
+        }else {
+            return false;
         }
     }
 

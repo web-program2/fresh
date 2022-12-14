@@ -36,12 +36,32 @@ const signIn = async(id, pw, isForce) => {
     }
     return res;
 }
-const sendEmail = (email) => {
-
+const sendEmail = async (email) => {
+    let res;
+    try{
+        res = await axios.post('http://localhost:8000/user-service/send_mail', {
+            email : email,
+        })
+    }catch(err){
+        throw new Error(err.message);
+    }
+    return res;
+}
+const checkAuthEmail = async (email, no) => {
+    let res;
+    try{
+        res = await axios.post('http://localhost:8000/user-service/check_mail_no', {
+            email : email,
+            no : no
+        })
+    }catch(err){
+        throw new Error(err.message);
+    }
+    return res;
 }
 
 
 export default {
     checkId, checkNickName, sendEmail,
-    signIn, 
+    signIn, checkAuthEmail
 }

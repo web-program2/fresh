@@ -1,6 +1,7 @@
 package user_service.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import user_service.dto.UserCatalogDto;
 import user_service.dto.input.InputData;
@@ -21,8 +22,9 @@ public class UserController {
     @PostMapping("/sign_in")
     public LoginOutputDto signIn(@RequestBody LoginInputDto loginInputDto) throws Exception {
         LoginOutputDto res = null;
+        System.out.println(loginInputDto.getIsForce());
         try {
-            res = userService.signIn(loginInputDto.getId(), loginInputDto.getPw(), loginInputDto.isForce());
+            res = userService.signIn(loginInputDto.getId(), loginInputDto.getPw(), loginInputDto.getIsForce());
             return res;
         }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.ACCEPTED, e.getMessage());
@@ -62,10 +64,16 @@ public class UserController {
         return userDto;
     }
 
-    @GetMapping("/send_mail")
-    public boolean sendMail(@RequestBody String email) throws MessagingException {
+    @PostMapping("/send_mail")
+    public boolean sendMail(@RequestBody InputData inputData) throws MessagingException {
+        return userService.sendMail(inputData.getEmail());
+    }
 
-        return userService.sendMail(email);
+    @Transactional
+    @PostMapping("/check_mail_no")
+    public boolean checkMailNo(@RequestBody InputData inputData){
+        System.out.println(inputData.getNo());
+        return userService.checkMailNo(inputData.getEmail(), inputData.getNo());
     }
 
 

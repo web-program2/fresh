@@ -150,7 +150,7 @@
           })
         }catch(err){
           /////////////////////////////////Wrong/////////////////////////////////
-          if(err.message === 'not fount'){
+          if(err.message === 'not found'){
             alert('일치하는 회원 정보가 없습니다. 다시 로그인 해주세요.'); return;
           }
           if(err.message === 'is login'){
@@ -163,6 +163,7 @@
                   isForce : true
                 })
               }catch(err){
+                console.log(err);
                 alert('통신 오류');
               }
             }

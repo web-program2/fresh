@@ -15,4 +15,6 @@ public interface UserService {
     UserCatalogDto testAll(int userIdx);
 
     boolean sendMail(String email);
+
+    boolean checkMailNo(String email, String no);
 }
