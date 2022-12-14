@@ -3,7 +3,18 @@ import axios from '../lib/axios';
 const getCatalogItems = async (data)=> {
     let res;
     try{
-        res = await axios.post('http://localhost:8000/user-service/~~~~', {
+        res = await axios.get('http://localhost:8000/catalog-service/catalog_list', {
+        })
+    }catch(err){
+        throw new Error(err.message);
+    }
+    return res;
+}
+const getCatalog = async (catalogIdx)=> {
+    let res;
+    console.log(catalogIdx)
+    try{
+        res = await axios.get(`http://localhost:8000/catalog-service/${catalogIdx}`, {
         })
     }catch(err){
         throw new Error(err.message);
@@ -27,5 +38,6 @@ const createCatalogItem = async (data)=> {
 }
 
 export default {
-    getCatalogItems, createCatalogItem
+    getCatalogItems, createCatalogItem,
+    getCatalog
 }
