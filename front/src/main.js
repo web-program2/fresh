@@ -9,6 +9,10 @@ Vue.config.productionTip = false;
 Vue.prototype.$Vue = Vue;
 
 const init = async ()=> {
+  const accessToken = localStorage.getItem('accessToken');
+  if(accessToken !== null){
+    await store.dispatch('get_user_data', accessToken);
+  }
   new Vue({
     router,
     store,
