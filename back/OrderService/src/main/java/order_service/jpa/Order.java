@@ -1,11 +1,9 @@
 package order_service.jpa;
 
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @Entity
@@ -13,17 +11,17 @@ import java.util.Date;
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long orderIdx;
+    private Long orderIdx;
 
     @Column(nullable = false)
     private Integer qty;
-    @Column(nullable = false)
-    private Integer unitPrice;
-    @Column(nullable = false)
-    private Integer totalPrice;
 
     @Column(nullable = false)
-    private Integer catalogIdx;
+    private Integer unitPrice;
+
     @Column(nullable = false)
-    private Integer userIdx;
+    private Long catalogIdx;
+
+    @Column(nullable = false)
+    private Long userIdx;
 }

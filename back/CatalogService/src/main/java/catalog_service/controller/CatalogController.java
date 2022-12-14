@@ -17,10 +17,19 @@ import java.util.List;
 @RequestMapping(value = "/catalog-service" )
 public class CatalogController {
 
+    //모든 카탈로그 리스트 가져오기
+    //카탈로그 인덱스로 카랄로그-유저 가져오기
+    //오더
+    //유저인덱스로 오더리스트 가져오기
+    //오더인덱스로 오더유저카탈로그 가져오기
     CatalogService catalogService;
     @Autowired
     public CatalogController(CatalogService catalogService) {
         this.catalogService = catalogService;
+    }
+    @GetMapping("/test")
+    public  String test(){
+        return "aaa";
     }
 
     @PostMapping("")
@@ -29,6 +38,18 @@ public class CatalogController {
                 catalogDto.getUserIdx(), catalogDto.getPrice()
         );
         return res;
+    }
+
+    @GetMapping("/{catalogIdx}")
+    public CatalogUserDto getCatalog(@PathVariable Long catalogIdx){
+        CatalogUserDto catalogUserDto = catalogService.getCatalog(catalogIdx);
+        return catalogUserDto;
+    }
+
+    @GetMapping("/catalog_list")
+    public List<Catalog> getCatalogList(){
+        List<Catalog> catalogList = catalogService.getCatalogList();
+        return catalogList;
     }
     @PutMapping("")
     public Catalog updateCatalog(@RequestBody CatalogDto catalogDto){
@@ -39,25 +60,6 @@ public class CatalogController {
         );
         return res;
     }
-
-    @GetMapping("/{catalogIdx}")
-    public CatalogUserDto getCatalog(@PathVariable Long catalogIdx){
-        CatalogUserDto catalogUserDto = catalogService.getCatalog(catalogIdx);
-        return catalogUserDto;
-    }
-    @GetMapping("/test")
-    public  String test(){
-        return "aaa";
-    }
-
-    @GetMapping()
-    public List<Catalog> getCatalogList(){
-        List<Catalog> catalogList = catalogService.getCatalogList();
-        //상품 - 작성자 다 가지고 오기
-        return catalogList;
-    }
-
-
     @DeleteMapping("/{catalogIdx}")
     public boolean deleteCatalog(@PathVariable Long catalogIdx){
         boolean res = catalogService.deleteCatalog(catalogIdx);
