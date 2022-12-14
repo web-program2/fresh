@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {catalog as catalogService} from '../../service'; 
+import {catalog as catalogService, order as orderService} from '../../service'; 
 
 
 const catalog = {
@@ -22,11 +22,18 @@ const catalog = {
             state.catalogList= data;
         },
         set_catalog(state, data){
-            console.log(data)
             state.catalogData = data;
         }
     },
     actions:{
+        async delete_catalog({commit}, data){
+            let res;
+            try{
+                res= await catalogService.deleteCatalog(data.catalogIdx);
+            }catch(err){
+                console.log(err.message);
+            }
+        },
         async setting_catalog_items({commit}, data){
             let res;
             try{
@@ -60,6 +67,14 @@ const catalog = {
             }catch(err){
                 console.log(err);
             }
+        },
+        async create_order({commit}, data){
+            try{
+                await orderService.createOrder(data);
+            }catch(err){
+                console.log(err);
+            }
+            return true;
         }
     }
 }
