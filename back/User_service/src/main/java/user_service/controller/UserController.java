@@ -1,5 +1,6 @@
 package user_service.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import user_service.dto.UserCatalogDto;
@@ -13,12 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/user-service", method = {RequestMethod.GET, RequestMethod.POST})
 public class UserController {
     private final UserService userService;
 
+    @GetMapping(value="/zipkin")
+    public String zipkinService1(){
+        log.info("Inside zipkinService 1..");
+        return "Hello?";
+    }
     @PostMapping("/sign_in")
     public LoginOutputDto signIn(@RequestBody LoginInputDto loginInputDto) throws Exception {
         LoginOutputDto res = null;
