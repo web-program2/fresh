@@ -9,6 +9,7 @@ import catalog_service.vo.ResponseUser;
 import com.google.inject.internal.ErrorsException;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CatalogServiceImpl implements CatalogService{
     private final CatalogRepo catalogRepo;
     private final UserServiceClient userServiceClient;
@@ -86,13 +88,14 @@ public class CatalogServiceImpl implements CatalogService{
         CatalogUserDto catalogUserDto = new CatalogUserDto();
         catalogUserDto.setCatalog(catalog);
 
+        log.info("Before call users microservice");
         CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
         Catalog finalCatalog = catalog;
         ResponseUser responseUser = circuitBreaker.run(() ->
                 userServiceClient.getResponseUser(finalCatalog.getUserIdx()),
                         throwable -> null
                     );
-
+        log.info("after call users microservice");
         catalogUserDto.setResponseUser(responseUser);
         return catalogUserDto;
     }
