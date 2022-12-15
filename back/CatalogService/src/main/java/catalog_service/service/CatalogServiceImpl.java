@@ -7,11 +7,15 @@ import catalog_service.jpa.Catalog;
 import catalog_service.jpa.CatalogRepo;
 import catalog_service.vo.ResponseUser;
 import com.google.inject.internal.ErrorsException;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,7 @@ public class CatalogServiceImpl implements CatalogService{
     private final CatalogRepo catalogRepo;
     private final UserServiceClient userServiceClient;
 
+    private final CircuitBreakerFactory circuitBreakerFactory;
 
     @Override
     public List<Catalog> testAll(Long userIdx) {
@@ -76,15 +81,27 @@ public class CatalogServiceImpl implements CatalogService{
                 catalog = catalogList.get(i);
             }
         }
+
         //catalogUserDto 추가
         CatalogUserDto catalogUserDto = new CatalogUserDto();
         catalogUserDto.setCatalog(catalog);
-        ResponseUser responseUser = userServiceClient.getResponseUser(catalog.getUserIdx());
+
+        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
+        Catalog finalCatalog = catalog;
+        ResponseUser responseUser = circuitBreaker.run(() ->
+                userServiceClient.getResponseUser(finalCatalog.getUserIdx()),
+                        throwable -> null
+                    );
+
         catalogUserDto.setResponseUser(responseUser);
         return catalogUserDto;
     }
 
-    @Transactional
+    public ResponseUser getDefaultUser() {
+        ResponseUser responseUser = new ResponseUser();
+        return responseUser;
+    }
+        @Transactional
     @Override
     public boolean deleteCatalog(Long catalogIdx) {
         List<Catalog> catalogList = catalogRepo.getCatalogList();

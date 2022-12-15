@@ -11,5 +11,4 @@ public interface UserServiceClient {
 
     @PostMapping("/user-service/response_user")
     ResponseUser getResponseUser(@RequestBody Long userIdx);
-
 }

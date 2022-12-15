@@ -7,6 +7,7 @@ import catalog_service.jpa.Catalog;
 import catalog_service.service.CatalogService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class CatalogController {
     //유저인덱스로 오더리스트 가져오기
     //오더인덱스로 오더유저카탈로그 가져오기
     CatalogService catalogService;
+
     @Autowired
     public CatalogController(CatalogService catalogService) {
         this.catalogService = catalogService;
