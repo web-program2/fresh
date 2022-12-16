@@ -145,11 +145,11 @@
     name: 'signUp',
     data () {
       return {
-        id : 'aaa111',
-        pw : 'aaa111!',
-        checkPw : 'aaa111!',
-        nickName : 'dsfa12312',
-        email : 'fdasf12312@naver.com', 
+        id : '',
+        pw : '',
+        checkPw : '',
+        nickName : '',
+        email : '', 
         show1: false, show2 : false,
         idRules: [
           value => !!value || '영어, 숫자 합쳐서 6글자 이상 만들어주세요.',
@@ -283,23 +283,23 @@
       // 회원가입 axious
       async signUp(){
         /////////////////////////////////전처리/////////////////////////////////
-        // if(this.pw !== this.checkPw){
-        //   alert('비밀번호가 일치하지 않습니다.!'); return;
-        // }
-        // const preorder = signValidation.checkPw(this.pw);
-        // if(preorder.message){
-        //   alert(preorder.message); return;
-        // }
-        // if(!this.overlapId) {
-        //   alert('아이디 중복확인을 해주세요'); return;
-        // }else if(!this.overlapNickName){
-        //   alert('닉네임 중복확인을 해주세요'); return;
-        // }else if(!this.overlapAuthentication){
-        //   alert('이메일 인증을 해주세요'); return;
-        // }
-        // if(!this.overlapId || !this.overlapNickName || !this.overlapAuthentication){
-        //   alert('중복확인을 해주세요'); return;
-        // }
+        if(this.pw !== this.checkPw){
+          alert('비밀번호가 일치하지 않습니다.!'); return;
+        }
+        const preorder = signValidation.checkPw(this.pw);
+        if(preorder.message){
+          alert(preorder.message); return;
+        }
+        if(!this.overlapId) {
+          alert('아이디 중복확인을 해주세요'); return;
+        }else if(!this.overlapNickName){
+          alert('닉네임 중복확인을 해주세요'); return;
+        }else if(!this.overlapAuthentication){
+          alert('이메일 인증을 해주세요'); return;
+        }
+        if(!this.overlapId || !this.overlapNickName || !this.overlapAuthentication){
+          alert('중복확인을 해주세요'); return;
+        }
         ///////////////////////////////////////////////////////////////////////
         let res;
         try{

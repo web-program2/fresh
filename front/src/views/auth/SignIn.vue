@@ -125,8 +125,8 @@
     },
     data() {
       return{
-        id : 'aaa111',
-        pw : 'aaa111!',
+        id : '',
+        pw : '',
         show1: false, show2 : false,
       }
     },

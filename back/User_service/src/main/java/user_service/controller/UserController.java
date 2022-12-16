@@ -39,6 +39,7 @@ public class UserController {
     }
     @PostMapping("/sign_up")
     public boolean signUp(@RequestBody InputData data){
+        System.out.println(data);
         String id = data.getId();
         String pw = data.getPw();
         String email = data.getEmail();

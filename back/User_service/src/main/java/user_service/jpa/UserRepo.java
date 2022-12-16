@@ -78,7 +78,7 @@ public class UserRepo{
     }
 
     public void createUserToken(Long userIdx) {
-        em.createNativeQuery("INSERT INTO user_tokens (userIdx, token) VALUES (?,?)")
+        em.createNativeQuery("INSERT INTO user_tokens (user_idx, token) VALUES (?,?)")
                 .setParameter(1, userIdx)
                 .setParameter(2,"")
                 .executeUpdate();

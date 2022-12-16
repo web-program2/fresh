@@ -1,55 +1,6 @@
 <template>
     <v-container>
-        <v-row justify="center">
-            <v-col cols='3'>
-                <h1>상품 등록</h1>
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols='3'>
-                <v-text-field
-                    label="상품이름 입력"
-                    v-model="name"
-                    hide-details="auto"
-                ></v-text-field>
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols='3'>
-                <v-text-field
-                    label="가격 입력"
-                    v-model="price"
-                    hide-details="auto"
-                ></v-text-field>
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols='3'>
-                <v-text-field
-                    label="재고량 입력"
-                    v-model="stock"
-                    hide-details="auto"
-                ></v-text-field>
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols='3'>
-                <v-text-field
-                    label="상품설명 입력"
-                    v-model="content"
-                    hide-details="auto"
-                ></v-text-field>
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-            <v-col cols="4" >
-                <v-btn
-                    elevation="2" block
-                    v-on:click="createCatalog()" >
-                    상품 등록하기
-                </v-btn>
-            </v-col>      
-        </v-row>
+        공지사항
     </v-container>
 </template>
 
